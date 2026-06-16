@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AuraUI Playground — Customize your theme and export a ready-to-use CSS file.">
+  <title>AuraUI — Theme Playground</title>
+  <link rel="stylesheet" href="aura-ui.css">
+  <style>
+    /* ── Playground shell styles — not part of the framework ── */
+    .pg-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 900px) {
+      .pg-layout { grid-template-columns: 1fr; }
+      .pg-sidebar { border-right: none; border-bottom: 1px solid var(--au-border); max-height: 60vh; overflow-y: auto; }
+    }
+
+    .pg-sidebar {
+      background: var(--au-surface);
+      border-right: 1px solid var(--au-border);
+      overflow-y: auto;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .pg-sidebar-head {
+      padding: var(--au-space-4) var(--au-space-5);
+      border-bottom: 1px solid var(--au-border);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--au-text-lg);
+      position: sticky;
+      top: 0;
+      background: var(--au-surface);
+      z-index: 10;
+    }
+
+    .pg-sidebar-body {
+      padding: var(--au-space-4) var(--au-space-5);
+    }
+
+    .pg-preview {
+      overflow-y: auto;
+      padding: var(--au-space-6);
+      background: var(--au-bg);
+    }
+
+    .pg-token-group {
+      margin-bottom: var(--au-space-6);
+    }
+
+    .pg-token-label {
+      font-size: var(--au-text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--au-text-muted);
+      margin-bottom: var(--au-space-3);
+    }
+
+    .pg-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--au-space-2);
+      margin-bottom: var(--au-space-3);
+    }
+
+    .pg-row label {
+      font-size: var(--au-text-xs);
+      color: var(--au-text);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pg-row input[type="color"] {
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1.5px solid var(--au-border);
+      border-radius: var(--au-radius-sm);
+      cursor: pointer;
+      padding: 2px;
+      background: var(--au-surface);
+    }
+
+    .pg-row input[type="range"] {
+      width: 7rem;
+      flex-shrink: 0;
+    }
+
+    .pg-row .pg-val {
+      font-size: var(--au-text-xs);
+      font-family: var(--au-font-mono);
+      color: var(--au-text-muted);
+      width: 3.5rem;
+      text-align: right;
+    }
+
+    .pg-code-output {
+      background: #0e0c1a;
+      color: #c3b6fc;
+      font-family: var(--au-font-mono);
+      font-size: 0.75rem;
+      border-radius: var(--au-radius-lg);
+      padding: var(--au-space-5);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.6;
+    }
+
+    .pg-copy-btn {
+      display: flex;
+      align-items: center;
+      gap: var(--au-space-2);
+    }
+
+    /* preview card layout */
+    .preview-grid {
+      display: grid;
+      gap: var(--au-space-5);
+    }
+
+    .preview-section-title {
+      font-size: var(--au-text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--au-text-muted);
+      margin-bottom: var(--au-space-3);
+    }
+  </style>
+</head>
+<body>
+
+<div class="pg-layout">
+
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="pg-sidebar">
+    <div class="pg-sidebar-head">
+      <span>🎛 Theme Tokens</span>
+      <a href="aura-ui-demo.html" class="au-text-sm" style="color: var(--au-color-primary);">← Demo</a>
+    </div>
+    <div class="pg-sidebar-body">
+
+      <!-- Colors -->
+      <div class="pg-token-group">
+        <p class="pg-token-label">Colors</p>
+
+        <div class="pg-row">
+          <label for="c-primary">Primary</label>
+          <input id="c-primary" type="color" value="#7c6ef8"
+            oninput="setToken('--au-color-primary', this.value); document.getElementById('v-primary').textContent = this.value;">
+          <span id="v-primary" class="pg-val">#7c6ef8</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="c-secondary">Secondary</label>
+          <input id="c-secondary" type="color" value="#f06292"
+            oninput="setToken('--au-color-secondary', this.value); document.getElementById('v-secondary').textContent = this.value;">
+          <span id="v-secondary" class="pg-val">#f06292</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="c-accent">Accent</label>
+          <input id="c-accent" type="color" value="#26c6da"
+            oninput="setToken('--au-color-accent', this.value); document.getElementById('v-accent').textContent = this.value;">
+          <span id="v-accent" class="pg-val">#26c6da</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="c-bg">Background</label>
+          <input id="c-bg" type="color" value="#f0f2ff"
+            oninput="setToken('--au-bg', this.value); document.getElementById('v-bg').textContent = this.value;">
+          <span id="v-bg" class="pg-val">#f0f2ff</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="c-text">Text</label>
+          <input id="c-text" type="color" value="#1a1730"
+            oninput="setToken('--au-text', this.value); document.getElementById('v-text').textContent = this.value;">
+          <span id="v-text" class="pg-val">#1a1730</span>
+        </div>
+      </div>
+
+      <!-- Radius -->
+      <div class="pg-token-group">
+        <p class="pg-token-label">Border Radius</p>
+
+        <div class="pg-row">
+          <label for="r-sm">Radius SM</label>
+          <input id="r-sm" class="au-slider" type="range" min="0" max="16" value="4"
+            oninput="setToken('--au-radius-sm', this.value + 'px'); document.getElementById('v-r-sm').textContent = this.value + 'px';">
+          <span id="v-r-sm" class="pg-val">4px</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="r-base">Radius</label>
+          <input id="r-base" class="au-slider" type="range" min="0" max="24" value="8"
+            oninput="setToken('--au-radius', this.value + 'px'); document.getElementById('v-r-base').textContent = this.value + 'px';">
+          <span id="v-r-base" class="pg-val">8px</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="r-lg">Radius LG</label>
+          <input id="r-lg" class="au-slider" type="range" min="0" max="32" value="16"
+            oninput="setToken('--au-radius-lg', this.value + 'px'); document.getElementById('v-r-lg').textContent = this.value + 'px';">
+          <span id="v-r-lg" class="pg-val">16px</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="r-xl">Radius XL</label>
+          <input id="r-xl" class="au-slider" type="range" min="0" max="48" value="24"
+            oninput="setToken('--au-radius-xl', this.value + 'px'); document.getElementById('v-r-xl').textContent = this.value + 'px';">
+          <span id="v-r-xl" class="pg-val">24px</span>
+        </div>
+      </div>
+
+      <!-- Glass -->
+      <div class="pg-token-group">
+        <p class="pg-token-label">Glass Morphism</p>
+
+        <div class="pg-row">
+          <label for="g-blur">Blur (default)</label>
+          <input id="g-blur" class="au-slider" type="range" min="2" max="40" value="16"
+            oninput="setToken('--au-glass-blur', this.value + 'px'); document.getElementById('v-g-blur').textContent = this.value + 'px';">
+          <span id="v-g-blur" class="pg-val">16px</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="g-opacity">Opacity (default)</label>
+          <input id="g-opacity" class="au-slider" type="range" min="5" max="95" value="45"
+            oninput="setToken('--au-glass-opacity', (this.value/100).toFixed(2)); document.getElementById('v-g-opacity').textContent = (this.value/100).toFixed(2);">
+          <span id="v-g-opacity" class="pg-val">0.45</span>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <div class="pg-token-group">
+        <p class="pg-token-label">Typography</p>
+
+        <div class="pg-row">
+          <label for="t-base">Base size</label>
+          <input id="t-base" class="au-slider" type="range" min="12" max="20" value="16"
+            oninput="setToken('--au-text-base', this.value + 'px'); document.getElementById('v-t-base').textContent = this.value + 'px';">
+          <span id="v-t-base" class="pg-val">16px</span>
+        </div>
+
+        <div class="pg-row">
+          <label for="t-font">Font stack</label>
+          <select id="t-font" class="au-select" style="width: auto; padding-right: var(--au-space-8);"
+            onchange="setToken('--au-font', this.value)">
+            <option value="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">System</option>
+            <option value="'Inter', sans-serif">Inter</option>
+            <option value="'Poppins', sans-serif">Poppins</option>
+            <option value="Georgia, 'Times New Roman', serif">Serif</option>
+            <option value="'JetBrains Mono', monospace">Mono</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Presets -->
+      <div class="pg-token-group">
+        <p class="pg-token-label">Presets</p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--au-space-2);">
+          <button class="au-btn au-btn-secondary au-btn-sm" onclick="applyPreset('default')">Default</button>
+          <button class="au-btn au-btn-secondary au-btn-sm" onclick="applyPreset('ocean')">Ocean</button>
+          <button class="au-btn au-btn-secondary au-btn-sm" onclick="applyPreset('forest')">Forest</button>
+          <button class="au-btn au-btn-secondary au-btn-sm" onclick="applyPreset('ember')">Ember</button>
+          <button class="au-btn au-btn-secondary au-btn-sm" onclick="applyPreset('midnight')">Midnight</button>
+        </div>
+      </div>
+
+      <!-- Export -->
+      <div class="pg-token-group">
+        <p class="pg-token-label">Export</p>
+        <div style="display: flex; flex-direction: column; gap: var(--au-space-2);">
+          <button class="au-btn au-btn-primary" onclick="showExport()">Generate CSS tokens</button>
+          <button class="au-btn au-btn-secondary" onclick="document.body.classList.toggle('au-dark')">Toggle dark mode</button>
+        </div>
+      </div>
+
+    </div><!-- /pg-sidebar-body -->
+  </aside>
+
+  <!-- ─── PREVIEW ─── -->
+  <main class="pg-preview" aria-label="Theme preview">
+
+    <div class="preview-grid">
+
+      <!-- Buttons preview -->
+      <div>
+        <p class="preview-section-title">Buttons</p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--au-space-3); align-items: center;">
+          <button class="au-btn au-btn-primary">Primary</button>
+          <button class="au-btn au-btn-secondary">Secondary</button>
+          <button class="au-btn au-btn-outline">Outline</button>
+          <button class="au-btn au-btn-ghost">Ghost</button>
+          <button class="au-btn au-btn-danger">Danger</button>
+          <button class="au-btn au-btn-success">Success</button>
+        </div>
+      </div>
+
+      <!-- Cards & Glass preview -->
+      <div style="background: linear-gradient(135deg, #c3b6fc 0%, #f8b4d9 50%, #a5d8f3 100%); padding: var(--au-space-6); border-radius: var(--au-radius-xl);">
+        <p class="preview-section-title" style="color: rgba(0,0,0,0.5);">Glass cards</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--au-space-4);">
+          <div class="au-glass-sm au-p-5">
+            <h5>Glass SM</h5>
+            <p class="au-text-sm">Light tier</p>
+          </div>
+          <div class="au-glass au-p-5">
+            <h5>Glass</h5>
+            <p class="au-text-sm">Default tier</p>
+          </div>
+          <div class="au-glass-lg au-p-5">
+            <h5>Glass LG</h5>
+            <p class="au-text-sm">Heavy tier</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form preview -->
+      <div class="au-card">
+        <div class="au-card-header">Sign up</div>
+        <div class="au-card-body">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--au-space-4);">
+            <div class="au-form-group">
+              <label class="au-label" for="pg-first">First name</label>
+              <input id="pg-first" class="au-input" type="text" placeholder="Jane">
+            </div>
+            <div class="au-form-group">
+              <label class="au-label" for="pg-last">Last name</label>
+              <input id="pg-last" class="au-input" type="text" placeholder="Smith">
+            </div>
+          </div>
+          <div class="au-form-group">
+            <label class="au-label" for="pg-email">Email</label>
+            <input id="pg-email" class="au-input" type="email" placeholder="jane@example.com">
+          </div>
+          <div class="au-form-group">
+            <label class="au-label" for="pg-role">Role</label>
+            <select id="pg-role" class="au-select">
+              <option>Designer</option>
+              <option>Engineer</option>
+              <option>Manager</option>
+            </select>
+          </div>
+          <div class="au-flex au-items-center au-gap-3">
+            <label class="au-toggle">
+              <input type="checkbox" checked>
+              <span class="au-toggle-track"></span>
+              Accept terms
+            </label>
+          </div>
+        </div>
+        <div class="au-card-footer au-flex au-justify-end">
+          <button class="au-btn au-btn-primary">Create account</button>
+        </div>
+      </div>
+
+      <!-- Alerts & Badges preview -->
+      <div>
+        <p class="preview-section-title">Alerts</p>
+        <div class="au-alert au-alert-success">
+          <span>✓</span>
+          <div><p class="au-alert-title">Success</p><p>Your changes have been saved.</p></div>
+        </div>
+        <div class="au-alert au-alert-info">
+          <span>ℹ</span>
+          <div><p class="au-alert-title">Info</p><p>A new version is available.</p></div>
+        </div>
+        <p class="preview-section-title" style="margin-top: var(--au-space-4);">Badges</p>
+        <div style="display: flex; gap: var(--au-space-2); flex-wrap: wrap;">
+          <span class="au-badge au-badge-primary">Primary</span>
+          <span class="au-badge au-badge-success">Success</span>
+          <span class="au-badge au-badge-warning">Warning</span>
+          <span class="au-badge au-badge-danger">Danger</span>
+          <span class="au-badge au-badge-info">Info</span>
+        </div>
+      </div>
+
+      <!-- Progress preview -->
+      <div>
+        <p class="preview-section-title">Progress</p>
+        <div style="display: flex; flex-direction: column; gap: var(--au-space-3); max-width: 28rem;">
+          <div class="au-progress"><div class="au-progress-bar" style="width: 70%;"></div></div>
+          <div class="au-progress au-progress-success"><div class="au-progress-bar" style="width: 85%;"></div></div>
+          <div class="au-progress au-progress-warning"><div class="au-progress-bar" style="width: 40%;"></div></div>
+          <div class="au-progress au-progress-danger"><div class="au-progress-bar" style="width: 20%;"></div></div>
+        </div>
+      </div>
+
+      <!-- Typography preview -->
+      <div>
+        <p class="preview-section-title">Typography</p>
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <p>Body text — <strong>bold</strong>, <em>italic</em>, <code>inline code</code>, and <a href="#">links</a>.</p>
+      </div>
+
+      <!-- Export output (hidden by default) -->
+      <div id="export-section" style="display: none;">
+        <p class="preview-section-title">Generated CSS Tokens</p>
+        <div style="display: flex; justify-content: flex-end; margin-bottom: var(--au-space-2);">
+          <button class="au-btn au-btn-sm au-btn-primary pg-copy-btn" onclick="copyCSS()">
+            <span>📋</span> Copy to clipboard
+          </button>
+        </div>
+        <pre id="export-output" class="pg-code-output"></pre>
+      </div>
+
+    </div><!-- /preview-grid -->
+  </main>
+
+</div><!-- /pg-layout -->
+
+<!-- Demo-only vanilla JS — not part of the framework -->
+<script>
+  /* ── Token helpers ── */
+  function setToken(name, value) {
+    document.documentElement.style.setProperty(name, value);
+    updateInputsByToken(name, value);
+  }
+
+  function updateInputsByToken(name, value) {
+    // keep color inputs in sync when using presets
+    var map = {
+      '--au-color-primary':   ['c-primary', 'v-primary'],
+      '--au-color-secondary': ['c-secondary', 'v-secondary'],
+      '--au-color-accent':    ['c-accent', 'v-accent'],
+      '--au-bg':              ['c-bg', 'v-bg'],
+      '--au-text':            ['c-text', 'v-text'],
+    };
+    if (map[name]) {
+      var el = document.getElementById(map[name][0]);
+      var vl = document.getElementById(map[name][1]);
+      if (el)  el.value = value;
+      if (vl)  vl.textContent = value;
+    }
+  }
+
+  /* ── Presets ── */
+  var presets = {
+    default: {
+      '--au-color-primary':   '#7c6ef8',
+      '--au-color-secondary': '#f06292',
+      '--au-color-accent':    '#26c6da',
+      '--au-bg':              '#f0f2ff',
+      '--au-text':            '#1a1730',
+      '--au-radius':          '8px',
+      '--au-radius-sm':       '4px',
+      '--au-radius-lg':       '16px',
+      '--au-radius-xl':       '24px',
+      '--au-glass-blur':      '16px',
+      '--au-glass-opacity':   '0.45',
+    },
+    ocean: {
+      '--au-color-primary':   '#0ea5e9',
+      '--au-color-secondary': '#38bdf8',
+      '--au-color-accent':    '#06b6d4',
+      '--au-bg':              '#f0f9ff',
+      '--au-text':            '#0c1a28',
+      '--au-radius':          '8px',
+      '--au-radius-sm':       '4px',
+      '--au-radius-lg':       '16px',
+      '--au-radius-xl':       '24px',
+      '--au-glass-blur':      '20px',
+      '--au-glass-opacity':   '0.40',
+    },
+    forest: {
+      '--au-color-primary':   '#22c55e',
+      '--au-color-secondary': '#16a34a',
+      '--au-color-accent':    '#84cc16',
+      '--au-bg':              '#f0fdf4',
+      '--au-text':            '#0d1f0d',
+      '--au-radius':          '6px',
+      '--au-radius-sm':       '3px',
+      '--au-radius-lg':       '12px',
+      '--au-radius-xl':       '20px',
+      '--au-glass-blur':      '14px',
+      '--au-glass-opacity':   '0.50',
+    },
+    ember: {
+      '--au-color-primary':   '#f97316',
+      '--au-color-secondary': '#ef4444',
+      '--au-color-accent':    '#fbbf24',
+      '--au-bg':              '#fff7ed',
+      '--au-text':            '#1c0a00',
+      '--au-radius':          '4px',
+      '--au-radius-sm':       '2px',
+      '--au-radius-lg':       '10px',
+      '--au-radius-xl':       '16px',
+      '--au-glass-blur':      '12px',
+      '--au-glass-opacity':   '0.55',
+    },
+    midnight: {
+      '--au-color-primary':   '#a78bfa',
+      '--au-color-secondary': '#f472b6',
+      '--au-color-accent':    '#34d399',
+      '--au-bg':              '#0e0c1a',
+      '--au-text':            '#e8e6f8',
+      '--au-radius':          '12px',
+      '--au-radius-sm':       '6px',
+      '--au-radius-lg':       '20px',
+      '--au-radius-xl':       '28px',
+      '--au-glass-blur':      '24px',
+      '--au-glass-opacity':   '0.35',
+    },
+  };
+
+  function applyPreset(name) {
+    var preset = presets[name];
+    if (!preset) return;
+    Object.keys(preset).forEach(function(token) {
+      setToken(token, preset[token]);
+    });
+    // sync sliders
+    syncSlider('r-sm',      '--au-radius-sm',     'v-r-sm');
+    syncSlider('r-base',    '--au-radius',        'v-r-base');
+    syncSlider('r-lg',      '--au-radius-lg',     'v-r-lg');
+    syncSlider('r-xl',      '--au-radius-xl',     'v-r-xl');
+    syncSlider('g-blur',    '--au-glass-blur',    'v-g-blur');
+    syncSlider('g-opacity', '--au-glass-opacity', 'v-g-opacity', true);
+    // activate dark mode for midnight preset
+    if (name === 'midnight') {
+      document.body.classList.add('au-dark');
+    } else {
+      document.body.classList.remove('au-dark');
+    }
+  }
+
+  function syncSlider(inputId, tokenName, valId, isFloat) {
+    var el = document.getElementById(inputId);
+    var vl = document.getElementById(valId);
+    var raw = document.documentElement.style.getPropertyValue(tokenName).trim();
+    if (!raw) return;
+    var num = parseFloat(raw);
+    if (el) el.value = isFloat ? Math.round(num * 100) : num;
+    if (vl) vl.textContent = raw;
+  }
+
+  /* ── Export ── */
+  function showExport() {
+    var tokens = [
+      '--au-color-primary',
+      '--au-color-secondary',
+      '--au-color-accent',
+      '--au-bg',
+      '--au-text',
+      '--au-radius-sm',
+      '--au-radius',
+      '--au-radius-lg',
+      '--au-radius-xl',
+      '--au-glass-blur',
+      '--au-glass-opacity',
+      '--au-text-base',
+      '--au-font',
+    ];
+
+    var lines = [':root {'];
+    tokens.forEach(function(t) {
+      var val = document.documentElement.style.getPropertyValue(t).trim();
+      if (val) {
+        lines.push('  ' + t + ': ' + val + ';');
+      }
+    });
+    lines.push('}');
+
+    var output = lines.join('\n');
+    document.getElementById('export-output').textContent = output;
+    var section = document.getElementById('export-section');
+    section.style.display = 'block';
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copyCSS() {
+    var text = document.getElementById('export-output').textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function() {
+        alert('CSS tokens copied to clipboard!');
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alert('CSS tokens copied to clipboard!');
+    }
+  }
+</script>
+</body>
+</html>

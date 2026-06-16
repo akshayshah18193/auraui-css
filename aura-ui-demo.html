@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AuraUI — A lightweight, token-driven CSS framework with glass morphism, forms, and responsive layout.">
+  <title>AuraUI — Component Demo</title>
+  <link rel="stylesheet" href="aura-ui.css">
+  <style>
+    /* Demo-only styles — not part of the framework */
+    .demo-gradient-bg {
+      background: linear-gradient(135deg, #c3b6fc 0%, #f8b4d9 50%, #a5d8f3 100%);
+      min-height: 100vh;
+    }
+    .demo-section-title {
+      font-size: var(--au-text-2xl);
+      font-weight: 700;
+      color: var(--au-text);
+      margin-bottom: var(--au-space-2);
+    }
+    .demo-section-desc {
+      color: var(--au-text-muted);
+      font-size: var(--au-text-sm);
+      margin-bottom: var(--au-space-6);
+    }
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--au-space-3);
+      align-items: center;
+      margin-bottom: var(--au-space-4);
+    }
+    .demo-swatch {
+      width: 3rem;
+      height: 3rem;
+      border-radius: var(--au-radius);
+      box-shadow: var(--au-shadow-sm);
+    }
+    .demo-section {
+      padding-block: var(--au-space-12);
+      border-bottom: 1px solid var(--au-border);
+    }
+    .demo-section:last-child { border-bottom: none; }
+
+    .theme-toggle-btn {
+      position: fixed;
+      bottom: var(--au-space-6);
+      right: var(--au-space-6);
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <header class="au-navbar">
+    <nav class="au-nav au-container">
+      <a href="#" class="au-nav-brand">✦ AuraUI</a>
+      <a href="#glass"   class="au-nav-link">Glass</a>
+      <a href="#buttons" class="au-nav-link">Buttons</a>
+      <a href="#forms"   class="au-nav-link">Forms</a>
+      <a href="#layout"  class="au-nav-link">Layout</a>
+      <a href="#cards"   class="au-nav-link">Cards</a>
+      <a href="aura-playground.html" class="au-btn au-btn-primary au-btn-sm">Playground</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ─── HERO ─── -->
+    <section class="demo-gradient-bg">
+      <div class="au-hero au-container">
+        <div>
+          <span class="au-badge au-badge-primary">v1.0.0</span>
+        </div>
+        <h1 style="font-size: var(--au-text-4xl); background: linear-gradient(135deg, #7c6ef8, #f06292); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          AuraUI
+        </h1>
+        <p style="max-width: 36rem; font-size: var(--au-text-lg); color: var(--au-text-muted);">
+          A lightweight, plug-and-play CSS framework with glass morphism,
+          token-driven theming, a complete form kit, and a responsive layout system.
+          Zero JS — one file.
+        </p>
+        <div class="demo-row" style="justify-content: center;">
+          <a href="#glass" class="au-btn au-btn-primary au-btn-lg">Explore Components</a>
+          <a href="aura-playground.html" class="au-btn au-btn-glass au-btn-lg">Open Playground</a>
+        </div>
+        <div class="demo-row" style="justify-content: center; gap: var(--au-space-6);">
+          <span class="au-text-sm au-text-muted">⚡ ~5 KB gzipped</span>
+          <span class="au-text-sm au-text-muted">🎨 Token-driven</span>
+          <span class="au-text-sm au-text-muted">♿ Accessible</span>
+          <span class="au-text-sm au-text-muted">🌗 Dark mode</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="au-container">
+
+      <!-- ─── GLASS MORPHISM ─── -->
+      <section id="glass" class="demo-section">
+        <h2 class="demo-section-title">Glass Morphism</h2>
+        <p class="demo-section-desc">
+          Three glass tiers — <code>au-glass-sm</code>, <code>au-glass</code>, <code>au-glass-lg</code> —
+          with configurable blur, opacity, and glow via CSS custom properties.
+        </p>
+
+        <div style="background: linear-gradient(135deg, #c3b6fc 0%, #f8b4d9 50%, #a5d8f3 100%); padding: var(--au-space-8); border-radius: var(--au-radius-xl);">
+          <div class="au-grid au-grid-auto" style="gap: var(--au-space-4);">
+            <div class="au-glass-sm au-p-6">
+              <h4 class="au-mb-2">Glass SM</h4>
+              <p class="au-text-sm au-text-muted">Light blur, higher opacity. Great for subtle overlays.</p>
+              <code class="au-text-xs">au-glass-sm</code>
+            </div>
+            <div class="au-glass au-p-6">
+              <h4 class="au-mb-2">Glass</h4>
+              <p class="au-text-sm au-text-muted">Balanced blur and transparency. The go-to tier.</p>
+              <code class="au-text-xs">au-glass</code>
+            </div>
+            <div class="au-glass-lg au-p-6">
+              <h4 class="au-mb-2">Glass LG</h4>
+              <p class="au-text-sm au-text-muted">Heavy blur, more transparent. Dramatic depth.</p>
+              <code class="au-text-xs">au-glass-lg</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── BUTTONS ─── -->
+      <section id="buttons" class="demo-section">
+        <h2 class="demo-section-title">Buttons</h2>
+        <p class="demo-section-desc">
+          Solid, outline, ghost, and glass variants with size modifiers and accessible focus styles.
+        </p>
+
+        <h5 class="au-mb-4 au-font-semi">Solid variants</h5>
+        <div class="demo-row">
+          <button class="au-btn au-btn-primary">Primary</button>
+          <button class="au-btn au-btn-secondary">Secondary</button>
+          <button class="au-btn au-btn-success">Success</button>
+          <button class="au-btn au-btn-danger">Danger</button>
+          <button class="au-btn au-btn-warning">Warning</button>
+          <button class="au-btn au-btn-info">Info</button>
+        </div>
+
+        <h5 class="au-mb-4 au-font-semi">Outline &amp; Ghost</h5>
+        <div class="demo-row">
+          <button class="au-btn au-btn-outline">Outline</button>
+          <button class="au-btn au-btn-ghost">Ghost</button>
+        </div>
+
+        <h5 class="au-mb-4 au-font-semi">Sizes</h5>
+        <div class="demo-row">
+          <button class="au-btn au-btn-primary au-btn-sm">Small</button>
+          <button class="au-btn au-btn-primary">Default</button>
+          <button class="au-btn au-btn-primary au-btn-lg">Large</button>
+          <button class="au-btn au-btn-primary au-btn-xl">Extra Large</button>
+        </div>
+
+        <h5 class="au-mb-4 au-font-semi">States</h5>
+        <div class="demo-row">
+          <button class="au-btn au-btn-primary" disabled>Disabled</button>
+          <button class="au-btn au-btn-secondary" disabled>Disabled</button>
+        </div>
+        <div class="au-mt-4">
+          <button class="au-btn au-btn-primary au-btn-full">Full Width Button</button>
+        </div>
+      </section>
+
+      <!-- ─── FORMS ─── -->
+      <section id="forms" class="demo-section">
+        <h2 class="demo-section-title">Forms</h2>
+        <p class="demo-section-desc">
+          Inputs, textareas, selects, checkboxes, radios, toggles, sliders, file uploads,
+          and validation states — all keyboard-accessible and mobile-friendly.
+        </p>
+
+        <div class="au-grid au-grid-cols-1 au-md\:grid-cols-2" style="gap: var(--au-space-8);">
+          <!-- Left column -->
+          <div>
+            <div class="au-form-group">
+              <label class="au-label au-label-required" for="name">Full name</label>
+              <input id="name" class="au-input" type="text" placeholder="Jane Smith">
+            </div>
+
+            <div class="au-form-group">
+              <label class="au-label" for="email">Email address</label>
+              <input id="email" class="au-input au-input-success" type="email" value="jane@example.com">
+              <span class="au-form-success">✓ Looks good!</span>
+            </div>
+
+            <div class="au-form-group">
+              <label class="au-label" for="password">Password</label>
+              <input id="password" class="au-input au-input-error" type="password" value="short">
+              <span class="au-form-error">Password must be at least 8 characters.</span>
+            </div>
+
+            <div class="au-form-group">
+              <label class="au-label" for="plan">Select plan</label>
+              <select id="plan" class="au-select">
+                <option>Free</option>
+                <option>Pro</option>
+                <option>Enterprise</option>
+              </select>
+            </div>
+
+            <div class="au-form-group">
+              <label class="au-label" for="bio">Bio</label>
+              <textarea id="bio" class="au-textarea" placeholder="Tell us about yourself…"></textarea>
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div>
+            <div class="au-form-group">
+              <label class="au-label">Search</label>
+              <div class="au-input-group">
+                <span class="au-input-icon">🔍</span>
+                <input class="au-input" type="search" placeholder="Search…">
+              </div>
+            </div>
+
+            <div class="au-form-group">
+              <p class="au-label">Notification preferences</p>
+              <div style="display: flex; flex-direction: column; gap: var(--au-space-2);">
+                <label class="au-checkbox">
+                  <input type="checkbox" checked>
+                  <span class="au-checkbox-box"></span>
+                  Email notifications
+                </label>
+                <label class="au-checkbox">
+                  <input type="checkbox">
+                  <span class="au-checkbox-box"></span>
+                  SMS alerts
+                </label>
+                <label class="au-checkbox">
+                  <input type="checkbox" checked>
+                  <span class="au-checkbox-box"></span>
+                  Weekly digest
+                </label>
+              </div>
+            </div>
+
+            <div class="au-form-group">
+              <p class="au-label">Theme</p>
+              <div style="display: flex; flex-direction: column; gap: var(--au-space-2);">
+                <label class="au-check-group">
+                  <input type="radio" name="theme" value="light" checked>
+                  Light
+                </label>
+                <label class="au-check-group">
+                  <input type="radio" name="theme" value="dark">
+                  Dark
+                </label>
+                <label class="au-check-group">
+                  <input type="radio" name="theme" value="auto">
+                  System
+                </label>
+              </div>
+            </div>
+
+            <div class="au-form-group">
+              <p class="au-label">Feature toggles</p>
+              <div style="display: flex; flex-direction: column; gap: var(--au-space-3);">
+                <label class="au-toggle">
+                  <input type="checkbox" checked>
+                  <span class="au-toggle-track"></span>
+                  Analytics enabled
+                </label>
+                <label class="au-toggle">
+                  <input type="checkbox">
+                  <span class="au-toggle-track"></span>
+                  Beta features
+                </label>
+              </div>
+            </div>
+
+            <div class="au-form-group">
+              <label class="au-label" for="volume">Volume — <span id="vol-val">70</span>%</label>
+              <input id="volume" class="au-slider" type="range" min="0" max="100" value="70"
+                oninput="document.getElementById('vol-val').textContent = this.value">
+            </div>
+
+            <div class="au-form-group">
+              <p class="au-label">Profile photo</p>
+              <label class="au-file-upload">
+                <input type="file" accept="image/*">
+                <span class="au-file-upload-icon">📁</span>
+                <span class="au-file-upload-text">
+                  <strong>Click to upload</strong> or drag &amp; drop
+                </span>
+                <span class="au-form-hint">PNG, JPG, GIF up to 5 MB</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── LAYOUT ─── -->
+      <section id="layout" class="demo-section">
+        <h2 class="demo-section-title">Layout</h2>
+        <p class="demo-section-desc">
+          Responsive grid, flex utilities, auto-fit columns, and a 12-column system.
+        </p>
+
+        <h5 class="au-mb-3 au-font-semi">12-column grid</h5>
+        <div class="au-grid au-grid-cols-12 au-mb-6" style="gap: var(--au-space-2);">
+          <div class="au-col-span-full au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">col-span-full</div>
+          <div class="au-col-span-6 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-6</div>
+          <div class="au-col-span-6 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-6</div>
+          <div class="au-col-span-4 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-4</div>
+          <div class="au-col-span-4 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-4</div>
+          <div class="au-col-span-4 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-4</div>
+          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
+          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
+          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
+          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
+        </div>
+
+        <h5 class="au-mb-3 au-font-semi">Auto-fit columns</h5>
+        <div class="au-grid au-grid-auto au-mb-6" style="gap: var(--au-space-2);">
+          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 1</div>
+          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 2</div>
+          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 3</div>
+          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 4</div>
+          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 5</div>
+        </div>
+
+        <h5 class="au-mb-3 au-font-semi">Flex utilities</h5>
+        <div class="au-flex au-items-center au-justify-between au-bg-surface au-p-4 au-rounded au-mb-2">
+          <span class="au-text-sm">justify-between</span>
+          <span class="au-badge au-badge-primary">flex</span>
+        </div>
+        <div class="au-flex au-items-center au-justify-center au-gap-4 au-bg-surface au-p-4 au-rounded">
+          <span class="au-badge au-badge-success">gap-4</span>
+          <span class="au-badge au-badge-info">items-center</span>
+          <span class="au-badge au-badge-warning">justify-center</span>
+        </div>
+      </section>
+
+      <!-- ─── CARDS ─── -->
+      <section id="cards" class="demo-section">
+        <h2 class="demo-section-title">Cards</h2>
+        <p class="demo-section-desc">
+          Surface cards, hover-lift variant, and glass card examples.
+        </p>
+
+        <div class="au-grid au-grid-auto" style="gap: var(--au-space-5);">
+          <!-- Basic card -->
+          <div class="au-card">
+            <div class="au-card-header">Basic Card</div>
+            <div class="au-card-body">
+              <p>A simple surface card with header, body, and footer sections.</p>
+            </div>
+            <div class="au-card-footer au-flex au-justify-end au-gap-2">
+              <button class="au-btn au-btn-secondary au-btn-sm">Cancel</button>
+              <button class="au-btn au-btn-primary au-btn-sm">Save</button>
+            </div>
+          </div>
+
+          <!-- Hover card -->
+          <div class="au-card au-card-hover">
+            <div class="au-card-body">
+              <div class="au-flex au-items-center au-gap-3 au-mb-4">
+                <div class="au-avatar" style="background: linear-gradient(135deg, #7c6ef8, #f06292);">JS</div>
+                <div>
+                  <p class="au-font-semi">Jane Smith</p>
+                  <p class="au-text-xs au-text-muted">Product Designer</p>
+                </div>
+                <span class="au-badge au-badge-success" style="margin-left: auto;">Active</span>
+              </div>
+              <p class="au-text-sm">Crafting intuitive user interfaces with a focus on accessibility and design systems.</p>
+            </div>
+          </div>
+
+          <!-- Stats card -->
+          <div class="au-card">
+            <div class="au-card-body">
+              <p class="au-text-sm au-text-muted au-mb-2">Monthly Revenue</p>
+              <p class="au-text-3xl au-font-bold">$24,560</p>
+              <p class="au-text-sm au-text-muted au-mt-2">
+                <span style="color: var(--au-color-success);">↑ 12.4%</span> from last month
+              </p>
+              <div class="au-progress au-mt-4">
+                <div class="au-progress-bar" style="width: 73%;"></div>
+              </div>
+              <p class="au-text-xs au-text-muted au-mt-1">73% of target</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── ALERTS & BADGES ─── -->
+      <section id="alerts" class="demo-section">
+        <h2 class="demo-section-title">Alerts &amp; Badges</h2>
+        <p class="demo-section-desc">Status alerts and inline badge components.</p>
+
+        <div class="au-alert au-alert-success">
+          <span>✓</span>
+          <div>
+            <p class="au-alert-title">Account verified</p>
+            <p>Your email address has been confirmed. Welcome aboard!</p>
+          </div>
+        </div>
+
+        <div class="au-alert au-alert-warning">
+          <span>⚠</span>
+          <div>
+            <p class="au-alert-title">Storage almost full</p>
+            <p>You have used 90% of your 5 GB quota. Consider upgrading your plan.</p>
+          </div>
+        </div>
+
+        <div class="au-alert au-alert-danger">
+          <span>✕</span>
+          <div>
+            <p class="au-alert-title">Payment failed</p>
+            <p>We couldn't charge your card. Please update your billing information.</p>
+          </div>
+        </div>
+
+        <div class="au-alert au-alert-info">
+          <span>ℹ</span>
+          <div>
+            <p class="au-alert-title">Scheduled maintenance</p>
+            <p>The system will be unavailable on Sunday, 3–5 AM UTC.</p>
+          </div>
+        </div>
+
+        <h5 class="au-mt-6 au-mb-3 au-font-semi">Badges</h5>
+        <div class="demo-row">
+          <span class="au-badge au-badge-primary">Primary</span>
+          <span class="au-badge au-badge-success">Success</span>
+          <span class="au-badge au-badge-warning">Warning</span>
+          <span class="au-badge au-badge-danger">Danger</span>
+          <span class="au-badge au-badge-info">Info</span>
+          <span class="au-badge au-badge-neutral">Neutral</span>
+        </div>
+      </section>
+
+      <!-- ─── TABLE ─── -->
+      <section id="table" class="demo-section">
+        <h2 class="demo-section-title">Table</h2>
+        <p class="demo-section-desc">Responsive table with striped rows and hover state.</p>
+
+        <div class="au-table-wrap">
+          <table class="au-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Joined</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="au-flex au-items-center au-gap-2">
+                    <div class="au-avatar au-avatar-sm" style="background: #7c6ef8;">AK</div>
+                    Alice Kim
+                  </div>
+                </td>
+                <td>Engineer</td>
+                <td><span class="au-badge au-badge-success">Active</span></td>
+                <td>Jan 2025</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="au-flex au-items-center au-gap-2">
+                    <div class="au-avatar au-avatar-sm" style="background: #f06292;">BJ</div>
+                    Ben Jones
+                  </div>
+                </td>
+                <td>Designer</td>
+                <td><span class="au-badge au-badge-warning">Pending</span></td>
+                <td>Mar 2025</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="au-flex au-items-center au-gap-2">
+                    <div class="au-avatar au-avatar-sm" style="background: #26c6da;">CL</div>
+                    Clara Lee
+                  </div>
+                </td>
+                <td>Manager</td>
+                <td><span class="au-badge au-badge-success">Active</span></td>
+                <td>Nov 2024</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="au-flex au-items-center au-gap-2">
+                    <div class="au-avatar au-avatar-sm" style="background: #4caf50;">DM</div>
+                    David Moore
+                  </div>
+                </td>
+                <td>Analyst</td>
+                <td><span class="au-badge au-badge-danger">Inactive</span></td>
+                <td>Aug 2024</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ─── PROGRESS & LOADING ─── -->
+      <section id="progress" class="demo-section">
+        <h2 class="demo-section-title">Progress &amp; Loading</h2>
+        <p class="demo-section-desc">Progress bars, spinners, and skeleton loaders.</p>
+
+        <div style="display: flex; flex-direction: column; gap: var(--au-space-3); max-width: 28rem; margin-bottom: var(--au-space-6);">
+          <div>
+            <div class="au-flex au-justify-between au-mb-1">
+              <span class="au-text-sm">Default</span><span class="au-text-sm au-text-muted">72%</span>
+            </div>
+            <div class="au-progress">
+              <div class="au-progress-bar" style="width: 72%;"></div>
+            </div>
+          </div>
+          <div>
+            <div class="au-flex au-justify-between au-mb-1">
+              <span class="au-text-sm">Success</span><span class="au-text-sm au-text-muted">89%</span>
+            </div>
+            <div class="au-progress au-progress-success">
+              <div class="au-progress-bar" style="width: 89%;"></div>
+            </div>
+          </div>
+          <div>
+            <div class="au-flex au-justify-between au-mb-1">
+              <span class="au-text-sm">Warning</span><span class="au-text-sm au-text-muted">45%</span>
+            </div>
+            <div class="au-progress au-progress-warning">
+              <div class="au-progress-bar" style="width: 45%;"></div>
+            </div>
+          </div>
+          <div>
+            <div class="au-flex au-justify-between au-mb-1">
+              <span class="au-text-sm">Danger</span><span class="au-text-sm au-text-muted">15%</span>
+            </div>
+            <div class="au-progress au-progress-danger">
+              <div class="au-progress-bar" style="width: 15%;"></div>
+            </div>
+          </div>
+          <div>
+            <div class="au-flex au-justify-between au-mb-1">
+              <span class="au-text-sm">Striped</span><span class="au-text-sm au-text-muted">60%</span>
+            </div>
+            <div class="au-progress au-progress-striped">
+              <div class="au-progress-bar" style="width: 60%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <h5 class="au-mb-3 au-font-semi">Spinners</h5>
+        <div class="demo-row au-mb-6">
+          <div class="au-spinner au-spinner-sm" role="status" aria-label="Loading"></div>
+          <div class="au-spinner" role="status" aria-label="Loading"></div>
+          <div class="au-spinner au-spinner-lg" role="status" aria-label="Loading"></div>
+        </div>
+
+        <h5 class="au-mb-3 au-font-semi">Skeleton loaders</h5>
+        <div class="au-card" style="max-width: 22rem;">
+          <div class="au-card-body">
+            <div class="au-flex au-items-center au-gap-3 au-mb-4">
+              <div class="au-skeleton" style="width: 2.5rem; height: 2.5rem; border-radius: 50%;"></div>
+              <div style="flex: 1;">
+                <div class="au-skeleton au-mb-2" style="height: 0.875rem; width: 60%;"></div>
+                <div class="au-skeleton" style="height: 0.75rem; width: 40%;"></div>
+              </div>
+            </div>
+            <div class="au-skeleton au-mb-2" style="height: 0.875rem;"></div>
+            <div class="au-skeleton au-mb-2" style="height: 0.875rem; width: 90%;"></div>
+            <div class="au-skeleton" style="height: 0.875rem; width: 70%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── MODAL DEMO ─── -->
+      <section id="modals" class="demo-section">
+        <h2 class="demo-section-title">Modal</h2>
+        <p class="demo-section-desc">CSS-only modal using the <code>:target</code> selector.</p>
+
+        <a href="#demo-modal" class="au-btn au-btn-primary">Open Modal</a>
+
+        <div id="demo-modal" class="au-modal-backdrop">
+          <div class="au-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="au-modal-header">
+              <span id="modal-title">Confirm action</span>
+              <a href="#modals" class="au-modal-close" aria-label="Close modal">✕</a>
+            </div>
+            <div class="au-modal-body">
+              <p>Are you sure you want to proceed? This action cannot be undone.</p>
+            </div>
+            <div class="au-modal-footer">
+              <a href="#modals" class="au-btn au-btn-secondary">Cancel</a>
+              <a href="#modals" class="au-btn au-btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── TABS ─── -->
+      <section id="tabs" class="demo-section">
+        <h2 class="demo-section-title">Tabs</h2>
+        <p class="demo-section-desc">Tab navigation with active state indicator.</p>
+
+        <div>
+          <div class="au-tabs" role="tablist">
+            <button class="au-tab au-active" role="tab" aria-selected="true"
+              onclick="switchTab(this, 'tab1')">Overview</button>
+            <button class="au-tab" role="tab" aria-selected="false"
+              onclick="switchTab(this, 'tab2')">Analytics</button>
+            <button class="au-tab" role="tab" aria-selected="false"
+              onclick="switchTab(this, 'tab3')">Settings</button>
+          </div>
+
+          <div id="tab1" class="au-tab-panel au-active" role="tabpanel">
+            <p>Welcome to the <strong>Overview</strong> tab. Here you'll find a summary of your recent activity.</p>
+          </div>
+          <div id="tab2" class="au-tab-panel" role="tabpanel">
+            <p>The <strong>Analytics</strong> tab displays charts, metrics, and trend data.</p>
+          </div>
+          <div id="tab3" class="au-tab-panel" role="tabpanel">
+            <p>The <strong>Settings</strong> tab lets you configure your preferences and account details.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── TOOLTIPS ─── -->
+      <section id="tooltips" class="demo-section">
+        <h2 class="demo-section-title">Tooltips</h2>
+        <p class="demo-section-desc">CSS-only tooltips via the <code>data-tooltip</code> attribute.</p>
+
+        <div class="demo-row">
+          <button class="au-btn au-btn-primary" data-tooltip="This is a primary action">Primary</button>
+          <button class="au-btn au-btn-secondary" data-tooltip="This is a secondary action">Secondary</button>
+          <span class="au-badge au-badge-info" data-tooltip="More information">Hover me</span>
+          <code data-tooltip="Click to copy">au-tooltip</code>
+        </div>
+      </section>
+
+      <!-- ─── AVATARS ─── -->
+      <section id="avatars" class="demo-section">
+        <h2 class="demo-section-title">Avatars</h2>
+        <p class="demo-section-desc">Circular avatars with initials or images, plus an avatar group.</p>
+
+        <div class="demo-row au-mb-6">
+          <div class="au-avatar au-avatar-sm" style="background: #7c6ef8;">AB</div>
+          <div class="au-avatar" style="background: #f06292;">CD</div>
+          <div class="au-avatar au-avatar-lg" style="background: #26c6da;">EF</div>
+          <div class="au-avatar au-avatar-xl" style="background: linear-gradient(135deg, #7c6ef8, #f06292);">GH</div>
+        </div>
+
+        <h5 class="au-mb-3 au-font-semi">Avatar group</h5>
+        <div class="au-avatar-group">
+          <div class="au-avatar" style="background: #7c6ef8;">A</div>
+          <div class="au-avatar" style="background: #f06292;">B</div>
+          <div class="au-avatar" style="background: #26c6da;">C</div>
+          <div class="au-avatar" style="background: #4caf50;">D</div>
+          <div class="au-avatar" style="background: var(--au-border); color: var(--au-text-muted);">+5</div>
+        </div>
+      </section>
+
+      <!-- ─── TYPOGRAPHY ─── -->
+      <section id="typography" class="demo-section">
+        <h2 class="demo-section-title">Typography</h2>
+        <p class="demo-section-desc">Heading scale, body copy, code, blockquote, and text utilities.</p>
+
+        <h1>Heading 1 — The quick brown fox</h1>
+        <h2>Heading 2 — The quick brown fox</h2>
+        <h3>Heading 3 — The quick brown fox</h3>
+        <h4>Heading 4 — The quick brown fox</h4>
+        <h5>Heading 5 — The quick brown fox</h5>
+        <h6>Heading 6 — The quick brown fox</h6>
+
+        <hr class="au-divider">
+
+        <p>Body copy — AuraUI is a lightweight, plug-and-play CSS framework for building modern interfaces.
+          Use <code>au-text-muted</code> for secondary text or <code>au-font-bold</code> for emphasis.</p>
+
+        <blockquote>Design is not just what it looks like and feels like. Design is how it works.</blockquote>
+
+        <div class="au-divider-label">Code</div>
+
+        <pre><code>/* Drop one file into any project */
+&lt;link rel="stylesheet" href="aura-ui.css"&gt;</code></pre>
+      </section>
+
+    </div><!-- /au-container -->
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="au-py-8" style="border-top: 1px solid var(--au-border); text-align: center;">
+    <div class="au-container">
+      <p class="au-text-sm au-text-muted">
+        AuraUI — MIT License · Built with ♥ and pure CSS
+      </p>
+    </div>
+  </footer>
+
+  <!-- ─── THEME TOGGLE ─── -->
+  <button class="au-btn au-btn-glass au-btn-icon theme-toggle-btn"
+    onclick="document.body.classList.toggle('au-dark')"
+    aria-label="Toggle dark mode"
+    title="Toggle dark mode">
+    🌗
+  </button>
+
+  <!-- Demo-only JS (tabs only) — not part of the framework -->
+  <script>
+    function switchTab(btn, panelId) {
+      // Deactivate all tabs and panels in the same tablist
+      var tablist = btn.closest('[role="tablist"]');
+      tablist.querySelectorAll('.au-tab').forEach(function(t) {
+        t.classList.remove('au-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      var container = tablist.parentElement;
+      container.querySelectorAll('.au-tab-panel').forEach(function(p) {
+        p.classList.remove('au-active');
+      });
+      // Activate clicked tab and its panel
+      btn.classList.add('au-active');
+      btn.setAttribute('aria-selected', 'true');
+      var panel = document.getElementById(panelId);
+      if (panel) { panel.classList.add('au-active'); }
+    }
+  </script>
+</body>
+</html>
