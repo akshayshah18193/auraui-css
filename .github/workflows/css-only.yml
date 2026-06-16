@@ -8,26 +8,28 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
       - name: Verify aura-ui.css is pure CSS
         env:
-          ACTOR: ${{ github.actor }}
-          OWNER: ${{ github.repository_owner }}
+          AUTHOR_ASSOCIATION: ${{ github.event.pull_request.author_association }}
         run: |
           set -euo pipefail
 
-          if grep -nE '<script\b|</script>|javascript:' aura-ui.css; then
+          if grep -niE "<script\\b|</script>|javascript:|vbscript:|%6a%61%76%61%73%63%72%69%70%74%3a|&#106;avascript:|&#x6a;avascript:|data:(text|application)/javascript|data:text/html|@import\\s+url\\([\"']?javascript:|url\\([\"']?(javascript|vbscript):|expression\\s*\\(|-moz-binding\\s*:|behavior\\s*:" aura-ui.css; then
             echo "❌ JavaScript content detected in aura-ui.css"
             exit 1
           fi
 
-          if grep -nE '<[[:alpha:]][^>]*>' aura-ui.css; then
-            if [ "$ACTOR" != "$OWNER" ]; then
+          if grep -nE '</?[[:alpha:]][[:alnum:]-]*\b[^>]*>' aura-ui.css; then
+            if [ "$AUTHOR_ASSOCIATION" != "OWNER" ]; then
               echo "❌ HTML content detected in aura-ui.css (allowed only for repository owner)"
               exit 1
             fi
-            echo "⚠️ HTML content detected, but allowed for repository owner ($OWNER)"
+            echo "⚠️ HTML content detected, but allowed for repository owner"
           fi
 
           echo "✅ aura-ui.css passed CSS-only checks"
