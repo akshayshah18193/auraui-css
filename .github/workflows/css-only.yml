@@ -24,7 +24,7 @@ jobs:
             exit 1
           fi
 
-          if grep -nE '</?[[:alpha:]][[:alnum:]-]*\b[^>]*>' aura-ui.css; then
+          if grep -niE '</?[[:alpha:]][[:alnum:]-]*([[:space:]/>]|$)[^>]*>' aura-ui.css; then
             if [ "$AUTHOR_ASSOCIATION" != "OWNER" ]; then
               echo "❌ HTML content detected in aura-ui.css (allowed only for repository owner)"
               exit 1
