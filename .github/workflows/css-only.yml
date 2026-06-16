@@ -1,0 +1,34 @@
+name: CSS-only check
+
+on:
+  pull_request:
+    paths:
+      - 'aura-ui.css'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify aura-ui.css is pure CSS
+        env:
+          AUTHOR_ASSOCIATION: ${{ github.event.pull_request.author_association }}
+        run: |
+          set -euo pipefail
+
+          if grep -niE "<script([[:space:]>]|$)|</script([[:space:]>]|$)|javascript:|vbscript:|%6a%61%76%61%73%63%72%69%70%74%3a|&#106;avascript:|&#x6a;avascript:|data:(text|application)/javascript|data:text/html|@import[[:space:]]+url\\([\"']?[[:space:]]*javascript:|url\\([\"']?[[:space:]]*(javascript|vbscript):|expression[[:space:]]*\\(|-moz-binding[[:space:]]*:|behavior[[:space:]]*:" aura-ui.css; then
+            echo "❌ JavaScript content detected in aura-ui.css"
+            exit 1
+          fi
+
+          if grep -niE '</?[[:alpha:]][[:alnum:]-]*([[:space:]/>]|$)[^>]*>' aura-ui.css; then
+            if [ "$AUTHOR_ASSOCIATION" != "OWNER" ]; then
+              echo "❌ HTML content detected in aura-ui.css (allowed only for repository owner)"
+              exit 1
+            fi
+            echo "⚠️ HTML content detected, but allowed for repository owner"
+          fi
+
+          echo "✅ aura-ui.css passed CSS-only checks"
