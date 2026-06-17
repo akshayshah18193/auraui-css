@@ -3,727 +3,1025 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AuraUI — A lightweight, token-driven CSS framework with glass morphism, forms, and responsive layout.">
-  <title>AuraUI — Component Demo</title>
+  <meta name="description" content="AuraUI demo covering the classes and utilities available in glass.css.">
+  <title>AuraUI — glass.css demo</title>
   <link rel="stylesheet" href="glass.css">
   <style>
-    /* Demo-only styles — not part of the framework */
     .demo-gradient-bg {
-      background: linear-gradient(135deg, #c3b6fc 0%, #f8b4d9 50%, #a5d8f3 100%);
-      min-height: 100vh;
+      background: linear-gradient(135deg, rgba(124, 110, 248, 0.22), rgba(240, 98, 146, 0.16), rgba(56, 189, 248, 0.14));
     }
-    .demo-section-title {
-      font-size: var(--au-text-2xl);
-      font-weight: 700;
-      color: var(--au-text);
-      margin-bottom: var(--au-space-2);
-    }
-    .demo-section-desc {
-      color: var(--au-text-muted);
-      font-size: var(--au-text-sm);
-      margin-bottom: var(--au-space-6);
-    }
-    .demo-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--au-space-3);
-      align-items: center;
-      margin-bottom: var(--au-space-4);
-    }
-    .demo-swatch {
-      width: 3rem;
-      height: 3rem;
-      border-radius: var(--au-radius);
-      box-shadow: var(--au-shadow-sm);
-    }
+
     .demo-section {
       padding-block: var(--au-space-12);
       border-bottom: 1px solid var(--au-border);
     }
-    .demo-section:last-child { border-bottom: none; }
+
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    .demo-section-title {
+      font-size: var(--au-text-2xl);
+      font-weight: 700;
+      margin-bottom: var(--au-space-2);
+    }
+
+    .demo-section-desc {
+      color: var(--au-text-muted);
+      font-size: var(--au-text-sm);
+      margin-bottom: var(--au-space-6);
+      max-width: 52rem;
+    }
+
+    .demo-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.5rem;
+      padding: var(--au-space-2) var(--au-space-3);
+      border: 1px dashed var(--au-border);
+      border-radius: var(--au-radius);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: var(--au-text-xs);
+      text-align: center;
+    }
+
+    .demo-grid-box {
+      min-height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--au-radius);
+      background: rgba(124, 110, 248, 0.12);
+      border: 1px solid rgba(124, 110, 248, 0.22);
+      font-size: var(--au-text-xs);
+      text-align: center;
+      padding: var(--au-space-2);
+    }
+
+    .demo-utility-box {
+      min-height: 4rem;
+      border: 1px solid var(--au-border);
+      border-radius: var(--au-radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .demo-swatch {
+      min-height: 5rem;
+      border: 1px solid var(--au-border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: start;
+      padding: var(--au-space-3);
+      color: var(--au-text);
+    }
+
+    .demo-scroll-area {
+      max-width: 100%;
+      white-space: nowrap;
+    }
+
+    .demo-truncate-target {
+      display: inline-block;
+      max-width: 18rem;
+      vertical-align: bottom;
+    }
+
+    .demo-hero-note {
+      max-width: 44rem;
+    }
 
     .theme-toggle-btn {
       position: fixed;
       bottom: var(--au-space-6);
       right: var(--au-space-6);
-      z-index: 999;
+      z-index: var(--au-z-toast);
     }
   </style>
 </head>
-<body>
-
-  <!-- ─── NAVBAR ─── -->
-  <header class="au-navbar">
-    <nav class="au-nav au-container">
-      <a href="#" class="au-nav-brand">✦ AuraUI</a>
-      <a href="#glass"   class="au-nav-link">Glass</a>
-      <a href="#buttons" class="au-nav-link">Buttons</a>
-      <a href="#forms"   class="au-nav-link">Forms</a>
-      <a href="#layout"  class="au-nav-link">Layout</a>
-      <a href="#cards"   class="au-nav-link">Cards</a>
-      <a href="aura-playground.html" class="au-btn au-btn-primary au-btn-sm">Playground</a>
-    </nav>
+<body class="au-bg-mesh">
+  <header class="au-container au-py-6">
+    <div class="au-row au-row-between au-row-center au-row-collapse">
+      <div class="au-stack au-stack-2">
+        <span class="au-badge au-badge-primary au-badge-dot">glass.css demo</span>
+        <a href="#main" class="au-h4 au-gradient-text" style="text-decoration: none;">AuraUI</a>
+      </div>
+      <nav class="au-cluster" aria-label="Section navigation">
+        <a href="#glass" class="au-btn au-btn-ghost au-btn-sm">Glass</a>
+        <a href="#forms" class="au-btn au-btn-ghost au-btn-sm">Forms</a>
+        <a href="#utilities" class="au-btn au-btn-ghost au-btn-sm">Utilities</a>
+        <a href="aura-playground.html" class="au-btn au-btn-primary au-btn-sm">Playground</a>
+      </nav>
+    </div>
   </header>
 
-  <main id="main">
-
-    <!-- ─── HERO ─── -->
+  <main id="main" class="au-min-h-screen">
     <section class="demo-gradient-bg">
-      <div class="au-hero au-container">
-        <div>
-          <span class="au-badge au-badge-primary">v1.0.0</span>
-        </div>
-        <h1 style="font-size: var(--au-text-4xl); background: linear-gradient(135deg, #7c6ef8, #f06292); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-          AuraUI
-        </h1>
-        <p style="max-width: 36rem; font-size: var(--au-text-lg); color: var(--au-text-muted);">
-          A lightweight, plug-and-play CSS framework with glass morphism,
-          token-driven theming, a complete form kit, and a responsive layout system.
-          Zero JS — one file.
-        </p>
-        <div class="demo-row" style="justify-content: center;">
-          <a href="#glass" class="au-btn au-btn-primary au-btn-lg">Explore Components</a>
-          <a href="aura-playground.html" class="au-btn au-btn-glass au-btn-lg">Open Playground</a>
-        </div>
-        <div class="demo-row" style="justify-content: center; gap: var(--au-space-6);">
-          <span class="au-text-sm au-text-muted">⚡ ~5 KB gzipped</span>
-          <span class="au-text-sm au-text-muted">🎨 Token-driven</span>
-          <span class="au-text-sm au-text-muted">♿ Accessible</span>
-          <span class="au-text-sm au-text-muted">🌗 Dark mode</span>
+      <div class="au-container au-py-6">
+        <div class="au-glass au-glass-glow au-p-8 au-text-center au-stack au-stack-6 au-animate-fade-in">
+          <div class="au-stack au-stack-2 au-items-center">
+            <span class="au-badge au-badge-info">Complete class coverage</span>
+            <p class="au-h1 au-gradient-text">AuraUI glass.css demo</p>
+            <p class="au-text-lg au-text-muted demo-hero-note au-mx-auto">
+              A curated, accessible showcase of the components, states, layout helpers, backgrounds,
+              motion utilities, and surface styles available in <span class="au-code">glass.css</span>.
+            </p>
+          </div>
+          <div class="au-cluster au-justify-center">
+            <a href="#glass" class="au-btn au-btn-primary au-btn-lg">Explore classes</a>
+            <a href="#utilities" class="au-btn au-btn-glass au-btn-lg">See utilities</a>
+            <button class="au-btn au-btn-outline au-btn-lg au-btn-pill" type="button">Try keyboard navigation</button>
+          </div>
+          <div class="au-cluster au-justify-center">
+            <span class="au-text-sm au-text-muted">⚡ One stylesheet</span>
+            <span class="au-text-sm au-text-muted">🎨 Themeable</span>
+            <span class="au-text-sm au-text-muted">♿ Keyboard friendly</span>
+            <span class="au-text-sm au-text-muted">📱 Responsive</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <div class="au-container">
-
-      <!-- ─── GLASS MORPHISM ─── -->
-      <section id="glass" class="demo-section">
-        <h2 class="demo-section-title">Glass Morphism</h2>
+    <section class="demo-section" id="glass">
+      <div class="au-container">
+        <h2 class="demo-section-title">Glass, theme, and surface primitives</h2>
         <p class="demo-section-desc">
-          Three glass tiers — <code>au-glass-sm</code>, <code>au-glass</code>, <code>au-glass-lg</code> —
-          with configurable blur, opacity, and glow via CSS custom properties.
+          Demonstrates <span class="au-code">au-light</span>, the glass tiers, glow state, cards, containers,
+          and key background surfaces used throughout the system.
         </p>
 
-        <div style="background: linear-gradient(135deg, #c3b6fc 0%, #f8b4d9 50%, #a5d8f3 100%); padding: var(--au-space-8); border-radius: var(--au-radius-xl);">
-          <div class="au-grid au-grid-auto" style="gap: var(--au-space-4);">
-            <div class="au-glass-sm au-p-6">
-              <h4 class="au-mb-2">Glass SM</h4>
-              <p class="au-text-sm au-text-muted">Light blur, higher opacity. Great for subtle overlays.</p>
-              <code class="au-text-xs">au-glass-sm</code>
+        <div class="au-grid au-grid-auto au-mb-8">
+          <article class="au-glass-sm au-p-6 au-stack au-stack-2">
+            <p class="au-h5">au-glass-sm</p>
+            <p class="au-text-sm au-text-muted">Subtle blur for lightweight overlays and inline surfaces.</p>
+          </article>
+          <article class="au-glass au-glass-glow au-p-6 au-stack au-stack-2">
+            <p class="au-h5">au-glass + au-glass-glow</p>
+            <p class="au-text-sm au-text-muted">Balanced blur with a highlighted border glow for emphasis.</p>
+          </article>
+          <article class="au-glass-lg au-p-6 au-stack au-stack-2">
+            <p class="au-h5">au-glass-lg</p>
+            <p class="au-text-sm au-text-muted">More dramatic depth for hero panels and spotlight content.</p>
+          </article>
+        </div>
+
+        <div class="au-light au-card au-card-sm au-mb-8">
+          <div class="au-card-header">
+            <span class="au-card-title">au-light theme wrapper</span>
+            <span class="au-badge au-badge-primary">Scoped theme</span>
+          </div>
+          <div class="au-grid au-grid-2">
+            <div class="au-stack au-stack-2">
+              <p class="au-text-sm">Place <span class="au-code">au-light</span> on any wrapper to flip tokens locally.</p>
+              <button class="au-btn au-btn-primary au-btn-sm" type="button">Primary action</button>
             </div>
-            <div class="au-glass au-p-6">
-              <h4 class="au-mb-2">Glass</h4>
-              <p class="au-text-sm au-text-muted">Balanced blur and transparency. The go-to tier.</p>
-              <code class="au-text-xs">au-glass</code>
-            </div>
-            <div class="au-glass-lg au-p-6">
-              <h4 class="au-mb-2">Glass LG</h4>
-              <p class="au-text-sm au-text-muted">Heavy blur, more transparent. Dramatic depth.</p>
-              <code class="au-text-xs">au-glass-lg</code>
+            <div class="au-glass au-p-4">
+              <p class="au-text-sm">Glass surfaces and text colors update automatically inside the light theme.</p>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- ─── BUTTONS ─── -->
-      <section id="buttons" class="demo-section">
-        <h2 class="demo-section-title">Buttons</h2>
+        <div class="au-card au-card-flush au-overflow-hidden au-mb-8">
+          <div class="au-bg-gradient-dark au-p-8">
+            <div class="au-grid au-grid-2">
+              <div class="au-stack au-stack-2">
+                <p class="au-h4">au-card-flush + au-bg-gradient-dark</p>
+                <p class="au-text-sm au-text-muted">Flush cards remove inset padding so full-bleed imagery and banners can shine.</p>
+              </div>
+              <div class="au-card au-card-glass au-p-6">
+                <p class="au-card-title au-mb-2">au-card-glass</p>
+                <p class="au-text-sm">Combine it with <span class="au-code">au-card</span> for a glass-backed card variant.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="au-container-fluid au-bg-alt au-rounded-xl au-py-6 au-px-6">
+          <div class="au-row au-row-between au-row-center au-row-collapse">
+            <div class="au-stack au-stack-2">
+              <p class="au-h5">au-container-fluid</p>
+              <p class="au-text-sm au-text-muted">Full-width section padding for banners, strips, and embedded experiences.</p>
+            </div>
+            <span class="au-badge au-badge-neutral">au-bg-alt</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section" id="layout">
+      <div class="au-container">
+        <h2 class="demo-section-title">Layout system</h2>
         <p class="demo-section-desc">
-          Solid, outline, ghost, and glass variants with size modifiers and accessible focus styles.
+          Containers, fixed grid scales, auto-fit grids, column spans, stacks, clusters, and row alignment helpers.
         </p>
 
-        <h5 class="au-mb-4 au-font-semi">Solid variants</h5>
-        <div class="demo-row">
-          <button class="au-btn au-btn-primary">Primary</button>
-          <button class="au-btn au-btn-secondary">Secondary</button>
-          <button class="au-btn au-btn-success">Success</button>
-          <button class="au-btn au-btn-danger">Danger</button>
-          <button class="au-btn au-btn-warning">Warning</button>
-          <button class="au-btn au-btn-info">Info</button>
-        </div>
-
-        <h5 class="au-mb-4 au-font-semi">Outline &amp; Ghost</h5>
-        <div class="demo-row">
-          <button class="au-btn au-btn-outline">Outline</button>
-          <button class="au-btn au-btn-ghost">Ghost</button>
-        </div>
-
-        <h5 class="au-mb-4 au-font-semi">Sizes</h5>
-        <div class="demo-row">
-          <button class="au-btn au-btn-primary au-btn-sm">Small</button>
-          <button class="au-btn au-btn-primary">Default</button>
-          <button class="au-btn au-btn-primary au-btn-lg">Large</button>
-          <button class="au-btn au-btn-primary au-btn-xl">Extra Large</button>
-        </div>
-
-        <h5 class="au-mb-4 au-font-semi">States</h5>
-        <div class="demo-row">
-          <button class="au-btn au-btn-primary" disabled>Disabled</button>
-          <button class="au-btn au-btn-secondary" disabled>Disabled</button>
-        </div>
-        <div class="au-mt-4">
-          <button class="au-btn au-btn-primary au-btn-full">Full Width Button</button>
-        </div>
-      </section>
-
-      <!-- ─── FORMS ─── -->
-      <section id="forms" class="demo-section">
-        <h2 class="demo-section-title">Forms</h2>
-        <p class="demo-section-desc">
-          Inputs, textareas, selects, checkboxes, radios, toggles, sliders, file uploads,
-          and validation states — all keyboard-accessible and mobile-friendly.
-        </p>
-
-        <div class="au-grid au-grid-cols-1 au-md\:grid-cols-2" style="gap: var(--au-space-8);">
-          <!-- Left column -->
+        <div class="au-stack au-stack-8">
           <div>
-            <div class="au-form-group">
-              <label class="au-label au-label-required" for="name">Full name</label>
-              <input id="name" class="au-input" type="text" placeholder="Jane Smith">
+            <p class="au-h5 au-mb-4">Fixed grid classes</p>
+            <div class="au-grid au-grid-1 au-mb-4">
+              <div class="demo-grid-box">au-grid-1</div>
             </div>
-
-            <div class="au-form-group">
-              <label class="au-label" for="email">Email address</label>
-              <input id="email" class="au-input au-input-success" type="email" value="jane@example.com">
-              <span class="au-form-success">✓ Looks good!</span>
+            <div class="au-grid au-grid-2 au-mb-4">
+              <div class="demo-grid-box">au-grid-2</div>
+              <div class="demo-grid-box">au-grid-2</div>
             </div>
-
-            <div class="au-form-group">
-              <label class="au-label" for="password">Password</label>
-              <input id="password" class="au-input au-input-error" type="password" value="short">
-              <span class="au-form-error">Password must be at least 8 characters.</span>
+            <div class="au-grid au-grid-3 au-mb-4">
+              <div class="demo-grid-box">au-grid-3</div>
+              <div class="demo-grid-box">au-grid-3</div>
+              <div class="demo-grid-box">au-grid-3</div>
             </div>
-
-            <div class="au-form-group">
-              <label class="au-label" for="plan">Select plan</label>
-              <select id="plan" class="au-select">
-                <option>Free</option>
-                <option>Pro</option>
-                <option>Enterprise</option>
-              </select>
+            <div class="au-grid au-grid-4 au-mb-4">
+              <div class="demo-grid-box">au-grid-4</div>
+              <div class="demo-grid-box">au-grid-4</div>
+              <div class="demo-grid-box">au-grid-4</div>
+              <div class="demo-grid-box">au-grid-4</div>
             </div>
-
-            <div class="au-form-group">
-              <label class="au-label" for="bio">Bio</label>
-              <textarea id="bio" class="au-textarea" placeholder="Tell us about yourself…"></textarea>
+            <div class="au-grid au-grid-6">
+              <div class="demo-grid-box">1</div>
+              <div class="demo-grid-box">2</div>
+              <div class="demo-grid-box">3</div>
+              <div class="demo-grid-box">4</div>
+              <div class="demo-grid-box">5</div>
+              <div class="demo-grid-box">6</div>
             </div>
           </div>
 
-          <!-- Right column -->
           <div>
+            <p class="au-h5 au-mb-4">12-column spans</p>
+            <div class="au-grid au-grid-12">
+              <div class="demo-grid-box au-col-full">au-col-full</div>
+              <div class="demo-grid-box au-col-6">au-col-6</div>
+              <div class="demo-grid-box au-col-6">au-col-6</div>
+              <div class="demo-grid-box au-col-4">au-col-4</div>
+              <div class="demo-grid-box au-col-4">au-col-4</div>
+              <div class="demo-grid-box au-col-4">au-col-4</div>
+              <div class="demo-grid-box au-col-3">au-col-3</div>
+              <div class="demo-grid-box au-col-3">au-col-3</div>
+              <div class="demo-grid-box au-col-3">au-col-3</div>
+              <div class="demo-grid-box au-col-3">au-col-3</div>
+              <div class="demo-grid-box au-col-2">au-col-2</div>
+              <div class="demo-grid-box au-col-2">au-col-2</div>
+              <div class="demo-grid-box au-col-2">au-col-2</div>
+              <div class="demo-grid-box au-col-2">au-col-2</div>
+              <div class="demo-grid-box au-col-2">au-col-2</div>
+              <div class="demo-grid-box au-col-2">au-col-2</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+              <div class="demo-grid-box au-col-1">1</div>
+            </div>
+          </div>
+
+          <div class="au-grid au-grid-auto">
+            <div class="au-card">
+              <p class="au-h5 au-mb-4">au-grid-auto</p>
+              <div class="au-grid au-grid-auto">
+                <div class="demo-grid-box">Auto 1</div>
+                <div class="demo-grid-box">Auto 2</div>
+                <div class="demo-grid-box">Auto 3</div>
+              </div>
+            </div>
+            <div class="au-card">
+              <p class="au-h5 au-mb-4">Stack and cluster</p>
+              <div class="au-stack au-stack-2 au-mb-4">
+                <div class="demo-chip">au-stack</div>
+                <div class="demo-chip">au-stack-2</div>
+              </div>
+              <div class="au-stack au-stack-6 au-mb-4">
+                <div class="demo-chip">au-stack-6</div>
+              </div>
+              <div class="au-stack au-stack-8 au-mb-4">
+                <div class="demo-chip">au-stack-8</div>
+              </div>
+              <div class="au-cluster">
+                <span class="au-badge au-badge-primary">au-cluster</span>
+                <span class="au-badge au-badge-success">Wraps</span>
+                <span class="au-badge au-badge-info">Aligns</span>
+                <span class="au-badge au-badge-warning">Gaps</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="au-grid au-grid-2">
+            <div class="au-card au-stack au-stack-2">
+              <p class="au-h5">Row alignment helpers</p>
+              <div class="au-row au-row-center au-bg-surface au-rounded au-p-4">
+                <span class="demo-chip au-shrink-0">au-row-center</span>
+                <span class="au-text-sm au-flex-auto">Centered cross-axis</span>
+              </div>
+              <div class="au-row au-row-end au-bg-surface au-rounded au-p-4" style="min-height: 4.5rem;">
+                <span class="demo-chip au-shrink-0">au-row-end</span>
+                <span class="au-text-sm au-flex-auto">Aligned to the end</span>
+              </div>
+            </div>
+            <div class="au-card au-stack au-stack-2">
+              <p class="au-h5">Row distribution helpers</p>
+              <div class="au-row au-row-between au-bg-surface au-rounded au-p-4">
+                <span class="demo-chip">Start</span>
+                <span class="demo-chip">au-row-between</span>
+                <span class="demo-chip">End</span>
+              </div>
+              <div class="au-row au-row-around au-bg-surface au-rounded au-p-4 au-row-collapse">
+                <span class="demo-chip">au-row-around</span>
+                <span class="demo-chip">au-row-collapse</span>
+                <span class="demo-chip">Responsive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section" id="forms">
+      <div class="au-container">
+        <h2 class="demo-section-title">Forms and controls</h2>
+        <p class="demo-section-desc">
+          Inputs, sizing, validation, add-ons, check controls, toggles, ranges, file inputs, and disabled states.
+        </p>
+
+        <div class="au-grid au-grid-auto">
+          <div class="au-card au-stack au-stack-6">
             <div class="au-form-group">
-              <label class="au-label">Search</label>
-              <div class="au-input-group">
-                <span class="au-input-icon">🔍</span>
-                <input class="au-input" type="search" placeholder="Search…">
+              <label class="au-label au-label-required" for="demo-text">Standard input</label>
+              <input id="demo-text" class="au-input" type="text" placeholder="Placeholder styles use au-input::placeholder">
+              <span class="au-hint">au-hint helper text</span>
+            </div>
+
+            <div class="au-grid au-grid-2">
+              <div class="au-form-group">
+                <label class="au-label" for="demo-input-sm">Small input</label>
+                <input id="demo-input-sm" class="au-input au-input-sm" type="text" value="au-input-sm">
+              </div>
+              <div class="au-form-group">
+                <label class="au-label" for="demo-input-lg">Large input</label>
+                <input id="demo-input-lg" class="au-input au-input-lg" type="text" value="au-input-lg">
               </div>
             </div>
 
+            <div class="au-grid au-grid-3">
+              <div class="au-form-group">
+                <label class="au-label" for="demo-success">Success state</label>
+                <input id="demo-success" class="au-input au-input-success" type="text" value="Looks great">
+                <span class="au-hint au-hint-success">au-input-success + au-hint-success</span>
+              </div>
+              <div class="au-form-group">
+                <label class="au-label" for="demo-warning">Warning state</label>
+                <input id="demo-warning" class="au-input au-input-warning" type="text" value="Needs review">
+                <span class="au-hint">au-input-warning</span>
+              </div>
+              <div class="au-form-group">
+                <label class="au-label" for="demo-error">Error state</label>
+                <input id="demo-error" class="au-input au-input-error" type="text" value="Missing value">
+                <span class="au-hint au-hint-error">au-input-error + au-hint-error</span>
+              </div>
+            </div>
+
+            <div class="au-grid au-grid-2">
+              <div class="au-form-group">
+                <label class="au-label" for="demo-select">Select</label>
+                <select id="demo-select" class="au-select">
+                  <option>Starter</option>
+                  <option>Professional</option>
+                  <option>Enterprise</option>
+                </select>
+              </div>
+              <div class="au-form-group">
+                <label class="au-label" for="demo-textarea">Textarea</label>
+                <textarea id="demo-textarea" class="au-textarea" placeholder="Resizable textarea">A multiline example using au-textarea.</textarea>
+              </div>
+            </div>
+
+            <div class="au-grid au-grid-2">
+              <div class="au-form-group">
+                <label class="au-label" for="demo-search">Input wrapper with left icon</label>
+                <div class="au-input-wrapper">
+                  <span class="au-input-icon" aria-hidden="true">🔍</span>
+                  <input id="demo-search" class="au-input" type="search" placeholder="Search components">
+                </div>
+              </div>
+              <div class="au-form-group">
+                <label class="au-label" for="demo-amount">Input wrapper with right icon</label>
+                <div class="au-input-wrapper">
+                  <input id="demo-amount" class="au-input au-input-has-right" type="text" value="128 seats">
+                  <span class="au-input-icon-right" aria-hidden="true">👥</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="au-grid au-grid-2">
+              <div class="au-form-group">
+                <label class="au-label" for="demo-url">Input group with prefix</label>
+                <div class="au-input-group">
+                  <span class="au-input-addon">https://</span>
+                  <input id="demo-url" class="au-input" type="text" value="auraui.dev">
+                </div>
+              </div>
+              <div class="au-form-group">
+                <label class="au-label" for="demo-price">Input group with suffix</label>
+                <div class="au-input-group">
+                  <input id="demo-price" class="au-input" type="text" value="49">
+                  <span class="au-input-addon au-input-addon-right">USD / mo</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="au-card au-stack au-stack-6">
             <div class="au-form-group">
-              <p class="au-label">Notification preferences</p>
-              <div style="display: flex; flex-direction: column; gap: var(--au-space-2);">
-                <label class="au-checkbox">
-                  <input type="checkbox" checked>
-                  <span class="au-checkbox-box"></span>
-                  Email notifications
+              <p class="au-label">Checkboxes and radios</p>
+              <div class="au-check-group">
+                <label class="au-check-label" for="demo-checkbox-1">
+                  <input id="demo-checkbox-1" class="au-checkbox" type="checkbox" checked>
+                  Product updates
                 </label>
-                <label class="au-checkbox">
-                  <input type="checkbox">
-                  <span class="au-checkbox-box"></span>
-                  SMS alerts
-                </label>
-                <label class="au-checkbox">
-                  <input type="checkbox" checked>
-                  <span class="au-checkbox-box"></span>
+                <label class="au-check-label" for="demo-checkbox-2">
+                  <input id="demo-checkbox-2" class="au-checkbox" type="checkbox">
                   Weekly digest
                 </label>
-              </div>
-            </div>
-
-            <div class="au-form-group">
-              <p class="au-label">Theme</p>
-              <div style="display: flex; flex-direction: column; gap: var(--au-space-2);">
-                <label class="au-check-group">
-                  <input type="radio" name="theme" value="light" checked>
-                  Light
+                <label class="au-check-label" for="demo-radio-1">
+                  <input id="demo-radio-1" class="au-radio" name="demo-plan" type="radio" checked>
+                  Monthly billing
                 </label>
-                <label class="au-check-group">
-                  <input type="radio" name="theme" value="dark">
-                  Dark
-                </label>
-                <label class="au-check-group">
-                  <input type="radio" name="theme" value="auto">
-                  System
+                <label class="au-check-label" for="demo-radio-2">
+                  <input id="demo-radio-2" class="au-radio" name="demo-plan" type="radio">
+                  Annual billing
                 </label>
               </div>
             </div>
 
             <div class="au-form-group">
-              <p class="au-label">Feature toggles</p>
-              <div style="display: flex; flex-direction: column; gap: var(--au-space-3);">
-                <label class="au-toggle">
-                  <input type="checkbox" checked>
-                  <span class="au-toggle-track"></span>
-                  Analytics enabled
-                </label>
-                <label class="au-toggle">
-                  <input type="checkbox">
-                  <span class="au-toggle-track"></span>
-                  Beta features
-                </label>
-              </div>
-            </div>
-
-            <div class="au-form-group">
-              <label class="au-label" for="volume">Volume — <span id="vol-val">70</span>%</label>
-              <input id="volume" class="au-slider" type="range" min="0" max="100" value="70"
-                oninput="document.getElementById('vol-val').textContent = this.value">
-            </div>
-
-            <div class="au-form-group">
-              <p class="au-label">Profile photo</p>
-              <label class="au-file-upload">
-                <input type="file" accept="image/*">
-                <span class="au-file-upload-icon">📁</span>
-                <span class="au-file-upload-text">
-                  <strong>Click to upload</strong> or drag &amp; drop
-                </span>
-                <span class="au-form-hint">PNG, JPG, GIF up to 5 MB</span>
+              <p class="au-label">Toggle</p>
+              <label class="au-toggle" for="demo-toggle">
+                <input id="demo-toggle" type="checkbox" checked>
+                <span class="au-toggle-track"><span class="au-toggle-thumb"></span></span>
+                Enable glass motion
               </label>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- ─── LAYOUT ─── -->
-      <section id="layout" class="demo-section">
-        <h2 class="demo-section-title">Layout</h2>
-        <p class="demo-section-desc">
-          Responsive grid, flex utilities, auto-fit columns, and a 12-column system.
-        </p>
-
-        <h5 class="au-mb-3 au-font-semi">12-column grid</h5>
-        <div class="au-grid au-grid-cols-12 au-mb-6" style="gap: var(--au-space-2);">
-          <div class="au-col-span-full au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">col-span-full</div>
-          <div class="au-col-span-6 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-6</div>
-          <div class="au-col-span-6 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-6</div>
-          <div class="au-col-span-4 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-4</div>
-          <div class="au-col-span-4 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-4</div>
-          <div class="au-col-span-4 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-4</div>
-          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
-          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
-          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
-          <div class="au-col-span-3 au-p-2 au-bg-surface au-rounded au-text-center au-text-sm">span-3</div>
-        </div>
-
-        <h5 class="au-mb-3 au-font-semi">Auto-fit columns</h5>
-        <div class="au-grid au-grid-auto au-mb-6" style="gap: var(--au-space-2);">
-          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 1</div>
-          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 2</div>
-          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 3</div>
-          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 4</div>
-          <div class="au-p-3 au-bg-surface au-rounded au-text-center au-text-sm">Auto 5</div>
-        </div>
-
-        <h5 class="au-mb-3 au-font-semi">Flex utilities</h5>
-        <div class="au-flex au-items-center au-justify-between au-bg-surface au-p-4 au-rounded au-mb-2">
-          <span class="au-text-sm">justify-between</span>
-          <span class="au-badge au-badge-primary">flex</span>
-        </div>
-        <div class="au-flex au-items-center au-justify-center au-gap-4 au-bg-surface au-p-4 au-rounded">
-          <span class="au-badge au-badge-success">gap-4</span>
-          <span class="au-badge au-badge-info">items-center</span>
-          <span class="au-badge au-badge-warning">justify-center</span>
-        </div>
-      </section>
-
-      <!-- ─── CARDS ─── -->
-      <section id="cards" class="demo-section">
-        <h2 class="demo-section-title">Cards</h2>
-        <p class="demo-section-desc">
-          Surface cards, hover-lift variant, and glass card examples.
-        </p>
-
-        <div class="au-grid au-grid-auto" style="gap: var(--au-space-5);">
-          <!-- Basic card -->
-          <div class="au-card">
-            <div class="au-card-header">Basic Card</div>
-            <div class="au-card-body">
-              <p>A simple surface card with header, body, and footer sections.</p>
+            <div class="au-form-group">
+              <label class="au-label au-row au-row-between au-row-center" for="demo-range">
+                <span>Range slider</span>
+                <span id="range-announcement" class="au-text-sm au-text-muted" aria-live="polite"><span id="range-value">72</span>%</span>
+              </label>
+              <input id="demo-range" class="au-range" type="range" min="0" max="100" value="72">
             </div>
-            <div class="au-card-footer au-flex au-justify-end au-gap-2">
-              <button class="au-btn au-btn-secondary au-btn-sm">Cancel</button>
-              <button class="au-btn au-btn-primary au-btn-sm">Save</button>
-            </div>
-          </div>
 
-          <!-- Hover card -->
-          <div class="au-card au-card-hover">
-            <div class="au-card-body">
-              <div class="au-flex au-items-center au-gap-3 au-mb-4">
-                <div class="au-avatar" style="background: linear-gradient(135deg, #7c6ef8, #f06292);">JS</div>
-                <div>
-                  <p class="au-font-semi">Jane Smith</p>
-                  <p class="au-text-xs au-text-muted">Product Designer</p>
+            <div class="au-form-group">
+              <p class="au-label">File input</p>
+              <label class="au-file" for="demo-file">
+                <input id="demo-file" type="file">
+                <span class="au-badge au-badge-info">Upload</span>
+                <span class="au-text-sm">Select a brand asset or drag it here</span>
+              </label>
+            </div>
+
+            <div class="au-form-group">
+              <p class="au-label">Disabled controls</p>
+              <div class="au-stack au-stack-2">
+                <input class="au-input" type="text" value="Disabled input" disabled>
+                <select class="au-select" disabled>
+                  <option>Disabled select</option>
+                </select>
+                <textarea class="au-textarea" disabled>Disabled textarea</textarea>
+                <div class="au-cluster">
+                  <label class="au-check-label" for="demo-checkbox-disabled">
+                    <input id="demo-checkbox-disabled" class="au-checkbox" type="checkbox" checked disabled>
+                    Disabled checkbox
+                  </label>
+                  <label class="au-check-label" for="demo-radio-disabled">
+                    <input id="demo-radio-disabled" class="au-radio" type="radio" checked disabled>
+                    Disabled radio
+                  </label>
                 </div>
-                <span class="au-badge au-badge-success" style="margin-left: auto;">Active</span>
               </div>
-              <p class="au-text-sm">Crafting intuitive user interfaces with a focus on accessibility and design systems.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <!-- Stats card -->
+    <section class="demo-section" id="buttons">
+      <div class="au-container">
+        <h2 class="demo-section-title">Buttons, badges, and alerts</h2>
+        <p class="demo-section-desc">
+          Button variants, sizes, loading and disabled states, badge styles, and status alerts.
+        </p>
+
+        <div class="au-card au-mb-8">
+          <div class="au-card-header">
+            <span class="au-card-title">Buttons</span>
+            <span class="au-badge au-badge-neutral">All variants</span>
+          </div>
+          <div class="au-card-body au-stack au-stack-6">
+            <div class="au-cluster">
+              <button class="au-btn au-btn-primary" type="button">Primary</button>
+              <button class="au-btn au-btn-secondary" type="button">Secondary</button>
+              <button class="au-btn au-btn-outline" type="button">Outline</button>
+              <button class="au-btn au-btn-ghost" type="button">Ghost</button>
+              <button class="au-btn au-btn-success" type="button">Success</button>
+              <button class="au-btn au-btn-danger" type="button">Danger</button>
+              <button class="au-btn au-btn-glass" type="button">Glass</button>
+            </div>
+            <div class="au-cluster">
+              <button class="au-btn au-btn-primary au-btn-xs" type="button">XS</button>
+              <button class="au-btn au-btn-primary au-btn-sm" type="button">SM</button>
+              <button class="au-btn au-btn-primary" type="button">Default</button>
+              <button class="au-btn au-btn-primary au-btn-lg" type="button">LG</button>
+              <button class="au-btn au-btn-primary au-btn-xl" type="button">XL</button>
+              <button class="au-btn au-btn-outline au-btn-pill" type="button">Pill</button>
+              <button class="au-btn au-btn-glass au-btn-icon" type="button" aria-label="Bookmark demo">★</button>
+              <button class="au-btn au-btn-secondary au-btn-icon au-btn-icon-sm" type="button" aria-label="Compact settings">⚙</button>
+            </div>
+            <div class="au-grid au-grid-2">
+              <button class="au-btn au-btn-primary au-btn-block" type="button">au-btn-block</button>
+              <div class="au-cluster">
+                <button class="au-btn au-btn-success au-btn-loading" type="button">Saving</button>
+                <button class="au-btn au-btn-secondary" type="button" disabled>Disabled</button>
+                <button class="au-btn au-btn-outline" type="button" disabled>Disabled button</button>
+              </div>
+            </div>
+          </div>
+          <p class="au-text-sm au-text-muted au-mt-4">Demo iconography uses emoji for brevity; production interfaces should prefer labeled SVG icons.</p>
+          <div class="au-card-footer au-justify-between">
+            <span class="au-text-sm au-text-muted">au-card-footer uses flex alignment helpers for action layouts.</span>
+            <div class="au-flex au-gap-2 au-justify-end">
+              <button class="au-btn au-btn-secondary au-btn-sm" type="button">Cancel</button>
+              <button class="au-btn au-btn-primary au-btn-sm" type="button">Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="au-grid au-grid-auto">
           <div class="au-card">
-            <div class="au-card-body">
-              <p class="au-text-sm au-text-muted au-mb-2">Monthly Revenue</p>
-              <p class="au-text-3xl au-font-bold">$24,560</p>
-              <p class="au-text-sm au-text-muted au-mt-2">
-                <span style="color: var(--au-color-success);">↑ 12.4%</span> from last month
-              </p>
-              <div class="au-progress au-mt-4">
-                <div class="au-progress-bar" style="width: 73%;"></div>
-              </div>
-              <p class="au-text-xs au-text-muted au-mt-1">73% of target</p>
+            <p class="au-card-title au-mb-4">Badges</p>
+            <div class="au-cluster">
+              <span class="au-badge au-badge-primary">Primary</span>
+              <span class="au-badge au-badge-success">Success</span>
+              <span class="au-badge au-badge-warning">Warning</span>
+              <span class="au-badge au-badge-danger">Danger</span>
+              <span class="au-badge au-badge-info">Info</span>
+              <span class="au-badge au-badge-neutral">Neutral</span>
+              <span class="au-badge au-badge-primary au-badge-dot">Dot badge</span>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- ─── ALERTS & BADGES ─── -->
-      <section id="alerts" class="demo-section">
-        <h2 class="demo-section-title">Alerts &amp; Badges</h2>
-        <p class="demo-section-desc">Status alerts and inline badge components.</p>
-
-        <div class="au-alert au-alert-success">
-          <span>✓</span>
-          <div>
-            <p class="au-alert-title">Account verified</p>
-            <p>Your email address has been confirmed. Welcome aboard!</p>
-          </div>
-        </div>
-
-        <div class="au-alert au-alert-warning">
-          <span>⚠</span>
-          <div>
-            <p class="au-alert-title">Storage almost full</p>
-            <p>You have used 90% of your 5 GB quota. Consider upgrading your plan.</p>
-          </div>
-        </div>
-
-        <div class="au-alert au-alert-danger">
-          <span>✕</span>
-          <div>
-            <p class="au-alert-title">Payment failed</p>
-            <p>We couldn't charge your card. Please update your billing information.</p>
-          </div>
-        </div>
-
-        <div class="au-alert au-alert-info">
-          <span>ℹ</span>
-          <div>
-            <p class="au-alert-title">Scheduled maintenance</p>
-            <p>The system will be unavailable on Sunday, 3–5 AM UTC.</p>
-          </div>
-        </div>
-
-        <h5 class="au-mt-6 au-mb-3 au-font-semi">Badges</h5>
-        <div class="demo-row">
-          <span class="au-badge au-badge-primary">Primary</span>
-          <span class="au-badge au-badge-success">Success</span>
-          <span class="au-badge au-badge-warning">Warning</span>
-          <span class="au-badge au-badge-danger">Danger</span>
-          <span class="au-badge au-badge-info">Info</span>
-          <span class="au-badge au-badge-neutral">Neutral</span>
-        </div>
-      </section>
-
-      <!-- ─── TABLE ─── -->
-      <section id="table" class="demo-section">
-        <h2 class="demo-section-title">Table</h2>
-        <p class="demo-section-desc">Responsive table with striped rows and hover state.</p>
-
-        <div class="au-table-wrap">
-          <table class="au-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Joined</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="au-flex au-items-center au-gap-2">
-                    <div class="au-avatar au-avatar-sm" style="background: #7c6ef8;">AK</div>
-                    Alice Kim
-                  </div>
-                </td>
-                <td>Engineer</td>
-                <td><span class="au-badge au-badge-success">Active</span></td>
-                <td>Jan 2025</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="au-flex au-items-center au-gap-2">
-                    <div class="au-avatar au-avatar-sm" style="background: #f06292;">BJ</div>
-                    Ben Jones
-                  </div>
-                </td>
-                <td>Designer</td>
-                <td><span class="au-badge au-badge-warning">Pending</span></td>
-                <td>Mar 2025</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="au-flex au-items-center au-gap-2">
-                    <div class="au-avatar au-avatar-sm" style="background: #26c6da;">CL</div>
-                    Clara Lee
-                  </div>
-                </td>
-                <td>Manager</td>
-                <td><span class="au-badge au-badge-success">Active</span></td>
-                <td>Nov 2024</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="au-flex au-items-center au-gap-2">
-                    <div class="au-avatar au-avatar-sm" style="background: #4caf50;">DM</div>
-                    David Moore
-                  </div>
-                </td>
-                <td>Analyst</td>
-                <td><span class="au-badge au-badge-danger">Inactive</span></td>
-                <td>Aug 2024</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- ─── PROGRESS & LOADING ─── -->
-      <section id="progress" class="demo-section">
-        <h2 class="demo-section-title">Progress &amp; Loading</h2>
-        <p class="demo-section-desc">Progress bars, spinners, and skeleton loaders.</p>
-
-        <div style="display: flex; flex-direction: column; gap: var(--au-space-3); max-width: 28rem; margin-bottom: var(--au-space-6);">
-          <div>
-            <div class="au-flex au-justify-between au-mb-1">
-              <span class="au-text-sm">Default</span><span class="au-text-sm au-text-muted">72%</span>
-            </div>
-            <div class="au-progress">
-              <div class="au-progress-bar" style="width: 72%;"></div>
-            </div>
-          </div>
-          <div>
-            <div class="au-flex au-justify-between au-mb-1">
-              <span class="au-text-sm">Success</span><span class="au-text-sm au-text-muted">89%</span>
-            </div>
-            <div class="au-progress au-progress-success">
-              <div class="au-progress-bar" style="width: 89%;"></div>
-            </div>
-          </div>
-          <div>
-            <div class="au-flex au-justify-between au-mb-1">
-              <span class="au-text-sm">Warning</span><span class="au-text-sm au-text-muted">45%</span>
-            </div>
-            <div class="au-progress au-progress-warning">
-              <div class="au-progress-bar" style="width: 45%;"></div>
-            </div>
-          </div>
-          <div>
-            <div class="au-flex au-justify-between au-mb-1">
-              <span class="au-text-sm">Danger</span><span class="au-text-sm au-text-muted">15%</span>
-            </div>
-            <div class="au-progress au-progress-danger">
-              <div class="au-progress-bar" style="width: 15%;"></div>
-            </div>
-          </div>
-          <div>
-            <div class="au-flex au-justify-between au-mb-1">
-              <span class="au-text-sm">Striped</span><span class="au-text-sm au-text-muted">60%</span>
-            </div>
-            <div class="au-progress au-progress-striped">
-              <div class="au-progress-bar" style="width: 60%;"></div>
-            </div>
-          </div>
-        </div>
-
-        <h5 class="au-mb-3 au-font-semi">Spinners</h5>
-        <div class="demo-row au-mb-6">
-          <div class="au-spinner au-spinner-sm" role="status" aria-label="Loading"></div>
-          <div class="au-spinner" role="status" aria-label="Loading"></div>
-          <div class="au-spinner au-spinner-lg" role="status" aria-label="Loading"></div>
-        </div>
-
-        <h5 class="au-mb-3 au-font-semi">Skeleton loaders</h5>
-        <div class="au-card" style="max-width: 22rem;">
-          <div class="au-card-body">
-            <div class="au-flex au-items-center au-gap-3 au-mb-4">
-              <div class="au-skeleton" style="width: 2.5rem; height: 2.5rem; border-radius: 50%;"></div>
-              <div style="flex: 1;">
-                <div class="au-skeleton au-mb-2" style="height: 0.875rem; width: 60%;"></div>
-                <div class="au-skeleton" style="height: 0.75rem; width: 40%;"></div>
+          <div class="au-card au-stack au-stack-2">
+            <div class="au-alert au-alert-success">
+              <span class="au-alert-icon" aria-hidden="true">✓</span>
+              <div>
+                <p class="au-font-600">Success alert</p>
+                <p class="au-text-sm">Changes have been saved and synced.</p>
               </div>
             </div>
-            <div class="au-skeleton au-mb-2" style="height: 0.875rem;"></div>
-            <div class="au-skeleton au-mb-2" style="height: 0.875rem; width: 90%;"></div>
-            <div class="au-skeleton" style="height: 0.875rem; width: 70%;"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ─── MODAL DEMO ─── -->
-      <section id="modals" class="demo-section">
-        <h2 class="demo-section-title">Modal</h2>
-        <p class="demo-section-desc">CSS-only modal using the <code>:target</code> selector.</p>
-
-        <a href="#demo-modal" class="au-btn au-btn-primary">Open Modal</a>
-
-        <div id="demo-modal" class="au-modal-backdrop">
-          <div class="au-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-            <div class="au-modal-header">
-              <span id="modal-title">Confirm action</span>
-              <a href="#modals" class="au-modal-close" aria-label="Close modal">✕</a>
+            <div class="au-alert au-alert-info">
+              <span class="au-alert-icon" aria-hidden="true">ℹ</span>
+              <div>
+                <p class="au-font-600">Info alert</p>
+                <p class="au-text-sm">Teams can scope the theme locally with <span class="au-code">au-light</span>.</p>
+              </div>
             </div>
-            <div class="au-modal-body">
-              <p>Are you sure you want to proceed? This action cannot be undone.</p>
+            <div class="au-alert au-alert-warning">
+              <span class="au-alert-icon" aria-hidden="true">⚠</span>
+              <div>
+                <p class="au-font-600">Warning alert</p>
+                <p class="au-text-sm">Motion utilities respect reduced-motion preferences.</p>
+              </div>
             </div>
-            <div class="au-modal-footer">
-              <a href="#modals" class="au-btn au-btn-secondary">Cancel</a>
-              <a href="#modals" class="au-btn au-btn-danger">Delete</a>
+            <div class="au-alert au-alert-danger">
+              <span class="au-alert-icon" aria-hidden="true">✕</span>
+              <div>
+                <p class="au-font-600">Danger alert</p>
+                <p class="au-text-sm">Use destructive actions sparingly and confirm intent.</p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ─── TABS ─── -->
-      <section id="tabs" class="demo-section">
-        <h2 class="demo-section-title">Tabs</h2>
-        <p class="demo-section-desc">Tab navigation with active state indicator.</p>
+    <section class="demo-section" id="navigation">
+      <div class="au-container">
+        <h2 class="demo-section-title">Navigation, table, avatars, and progress</h2>
+        <p class="demo-section-desc">
+          Tabs, pill tabs, responsive tables, avatars, groups, and progress indicators.
+        </p>
 
-        <div>
-          <div class="au-tabs" role="tablist">
-            <button class="au-tab au-active" role="tab" aria-selected="true"
-              onclick="switchTab(this, 'tab1')">Overview</button>
-            <button class="au-tab" role="tab" aria-selected="false"
-              onclick="switchTab(this, 'tab2')">Analytics</button>
-            <button class="au-tab" role="tab" aria-selected="false"
-              onclick="switchTab(this, 'tab3')">Settings</button>
+        <div class="au-grid au-grid-auto au-mb-8">
+          <div class="au-card au-stack au-stack-6">
+            <div>
+              <p class="au-card-title au-mb-4">Tabs</p>
+              <div class="au-tabs" role="tablist" aria-label="Product views">
+                <button id="tab-overview-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')" onkeydown="handleTabKeydown(event, 'tabs-standard')">Overview</button>
+                <button id="tab-reports-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')" onkeydown="handleTabKeydown(event, 'tabs-standard')">Reports</button>
+                <button id="tab-settings-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')" onkeydown="handleTabKeydown(event, 'tabs-standard')">Settings</button>
+              </div>
+              <div id="tabs-standard" class="au-py-4">
+                <div id="tab-overview" role="tabpanel" aria-labelledby="tab-overview-tab" data-tab-panel>
+                  <p class="au-text-sm">Standard tabs use the <span class="au-code">active</span> state or <span class="au-code">aria-selected="true"</span>.</p>
+                </div>
+                <div id="tab-reports" class="au-hidden" role="tabpanel" aria-labelledby="tab-reports-tab" data-tab-panel>
+                  <p class="au-text-sm">Report metrics, snapshots, and performance views live here.</p>
+                </div>
+                <div id="tab-settings" class="au-hidden" role="tabpanel" aria-labelledby="tab-settings-tab" data-tab-panel>
+                  <p class="au-text-sm">Settings panels keep controls grouped and easy to scan.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p class="au-card-title au-mb-4">Pill tabs</p>
+              <div class="au-tabs au-tabs-pill" role="tablist" aria-label="Billing interval">
+                <button id="pill-monthly-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')" onkeydown="handleTabKeydown(event, 'tabs-pill')">Monthly</button>
+                <button id="pill-annual-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')" onkeydown="handleTabKeydown(event, 'tabs-pill')">Annual</button>
+              </div>
+              <div id="tabs-pill" class="au-py-4">
+                <div id="pill-monthly" role="tabpanel" aria-labelledby="pill-monthly-tab" data-tab-panel>
+                  <p class="au-text-sm">The monthly plan provides flexibility for short-term teams.</p>
+                </div>
+                <div id="pill-annual" class="au-hidden" role="tabpanel" aria-labelledby="pill-annual-tab" data-tab-panel>
+                  <p class="au-text-sm">Annual billing lowers cost for long-lived design systems.</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div id="tab1" class="au-tab-panel au-active" role="tabpanel">
-            <p>Welcome to the <strong>Overview</strong> tab. Here you'll find a summary of your recent activity.</p>
+          <div class="au-card">
+            <p class="au-card-title au-mb-4">Avatars</p>
+            <div class="au-cluster au-mb-6">
+              <span class="au-avatar au-avatar-xs">XS</span>
+              <span class="au-avatar au-avatar-sm">SM</span>
+              <span class="au-avatar">MD</span>
+              <span class="au-avatar au-avatar-lg">LG</span>
+              <span class="au-avatar au-avatar-xl">XL</span>
+            </div>
+            <div class="au-avatar-group au-mb-6">
+              <span class="au-avatar">AL</span>
+              <span class="au-avatar">BK</span>
+              <span class="au-avatar">CP</span>
+              <span class="au-avatar">DN</span>
+            </div>
+            <div class="au-stack au-stack-2">
+              <div>
+                <p class="au-text-sm au-mb-2">au-progress-sm</p>
+                <div class="au-progress au-progress-sm"><div class="au-progress-bar" style="width: 36%;"></div></div>
+              </div>
+              <div>
+                <p class="au-text-sm au-mb-2">Default</p>
+                <div class="au-progress"><div class="au-progress-bar" style="width: 58%;"></div></div>
+              </div>
+              <div>
+                <p class="au-text-sm au-mb-2">au-progress-lg</p>
+                <div class="au-progress au-progress-lg"><div class="au-progress-bar" style="width: 82%;"></div></div>
+              </div>
+              <div>
+                <p class="au-text-sm au-mb-2">au-progress-striped</p>
+                <div class="au-progress au-progress-striped"><div class="au-progress-bar" style="width: 68%;"></div></div>
+              </div>
+            </div>
           </div>
-          <div id="tab2" class="au-tab-panel" role="tabpanel">
-            <p>The <strong>Analytics</strong> tab displays charts, metrics, and trend data.</p>
+        </div>
+
+        <div class="au-card">
+          <div class="au-card-header">
+            <span class="au-card-title">Table</span>
+            <span class="au-badge au-badge-neutral">au-table-wrapper + au-table-striped</span>
           </div>
-          <div id="tab3" class="au-tab-panel" role="tabpanel">
-            <p>The <strong>Settings</strong> tab lets you configure your preferences and account details.</p>
+          <div class="au-table-wrapper">
+            <table class="au-table au-table-striped">
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Purpose</th>
+                  <th>Status</th>
+                  <th>Coverage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="au-font-mono">au-glass</span></td>
+                  <td>Surface effect</td>
+                  <td><span class="au-badge au-badge-success">Documented</span></td>
+                  <td>Hero and cards</td>
+                </tr>
+                <tr>
+                  <td><span class="au-font-mono">au-range</span></td>
+                  <td>Range control</td>
+                  <td><span class="au-badge au-badge-success">Documented</span></td>
+                  <td>Forms section</td>
+                </tr>
+                <tr>
+                  <td><span class="au-font-mono">au-tabs-pill</span></td>
+                  <td>Pill nav</td>
+                  <td><span class="au-badge au-badge-info">Interactive</span></td>
+                  <td>This section</td>
+                </tr>
+                <tr>
+                  <td><span class="au-font-mono">au-scrollbar</span></td>
+                  <td>Overflow styling</td>
+                  <td><span class="au-badge au-badge-warning">Utility</span></td>
+                  <td>Utilities section</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ─── TOOLTIPS ─── -->
-      <section id="tooltips" class="demo-section">
-        <h2 class="demo-section-title">Tooltips</h2>
-        <p class="demo-section-desc">CSS-only tooltips via the <code>data-tooltip</code> attribute.</p>
+    <section class="demo-section" id="typography">
+      <div class="au-container">
+        <h2 class="demo-section-title">Typography and separators</h2>
+        <p class="demo-section-desc">
+          Heading utilities, text sizing and color utilities, weight helpers, alignment, code styles, and dividers.
+        </p>
 
-        <div class="demo-row">
-          <button class="au-btn au-btn-primary" data-tooltip="This is a primary action">Primary</button>
-          <button class="au-btn au-btn-secondary" data-tooltip="This is a secondary action">Secondary</button>
-          <span class="au-badge au-badge-info" data-tooltip="More information">Hover me</span>
-          <code data-tooltip="Click to copy">au-tooltip</code>
+        <div class="au-grid au-grid-auto">
+          <div class="au-card au-stack au-stack-2">
+            <p class="au-h1">au-h1 utility</p>
+            <p class="au-h2">au-h2 utility</p>
+            <p class="au-h3">au-h3 utility</p>
+            <p class="au-h4">au-h4 utility</p>
+            <p class="au-h5">au-h5 utility</p>
+            <p class="au-h6">au-h6 utility</p>
+          </div>
+          <div class="au-card au-stack au-stack-2">
+            <p class="au-text-xs">au-text-xs</p>
+            <p class="au-text-sm">au-text-sm</p>
+            <p class="au-text-base">au-text-base</p>
+            <p class="au-text-lg">au-text-lg</p>
+            <p class="au-text-xl">au-text-xl</p>
+            <p class="au-text-2xl">au-text-2xl</p>
+            <p class="au-text-primary">au-text-primary</p>
+            <p class="au-text-success">au-text-success</p>
+            <p class="au-text-warning">au-text-warning</p>
+            <p class="au-text-danger">au-text-danger</p>
+            <p class="au-text-info">au-text-info</p>
+            <p class="au-text-muted">au-text-muted</p>
+          </div>
+          <div class="au-card au-stack au-stack-2">
+            <p class="au-font-400">au-font-400</p>
+            <p class="au-font-500">au-font-500</p>
+            <p class="au-font-600">au-font-600</p>
+            <p class="au-font-700">au-font-700</p>
+            <p class="au-font-mono">au-font-mono</p>
+            <p class="au-text-left">au-text-left</p>
+            <p class="au-text-center">au-text-center</p>
+            <p class="au-text-right">au-text-right</p>
+            <p>Inline code uses <span class="au-code">au-code</span>.</p>
+          </div>
         </div>
-      </section>
-
-      <!-- ─── AVATARS ─── -->
-      <section id="avatars" class="demo-section">
-        <h2 class="demo-section-title">Avatars</h2>
-        <p class="demo-section-desc">Circular avatars with initials or images, plus an avatar group.</p>
-
-        <div class="demo-row au-mb-6">
-          <div class="au-avatar au-avatar-sm" style="background: #7c6ef8;">AB</div>
-          <div class="au-avatar" style="background: #f06292;">CD</div>
-          <div class="au-avatar au-avatar-lg" style="background: #26c6da;">EF</div>
-          <div class="au-avatar au-avatar-xl" style="background: linear-gradient(135deg, #7c6ef8, #f06292);">GH</div>
-        </div>
-
-        <h5 class="au-mb-3 au-font-semi">Avatar group</h5>
-        <div class="au-avatar-group">
-          <div class="au-avatar" style="background: #7c6ef8;">A</div>
-          <div class="au-avatar" style="background: #f06292;">B</div>
-          <div class="au-avatar" style="background: #26c6da;">C</div>
-          <div class="au-avatar" style="background: #4caf50;">D</div>
-          <div class="au-avatar" style="background: var(--au-border); color: var(--au-text-muted);">+5</div>
-        </div>
-      </section>
-
-      <!-- ─── TYPOGRAPHY ─── -->
-      <section id="typography" class="demo-section">
-        <h2 class="demo-section-title">Typography</h2>
-        <p class="demo-section-desc">Heading scale, body copy, code, blockquote, and text utilities.</p>
-
-        <h1>Heading 1 — The quick brown fox</h1>
-        <h2>Heading 2 — The quick brown fox</h2>
-        <h3>Heading 3 — The quick brown fox</h3>
-        <h4>Heading 4 — The quick brown fox</h4>
-        <h5>Heading 5 — The quick brown fox</h5>
-        <h6>Heading 6 — The quick brown fox</h6>
 
         <hr class="au-divider">
+        <div class="au-divider-label">au-divider-label</div>
+        <pre class="au-pre">&lt;button class="au-btn au-btn-primary au-btn-pill"&gt;AuraUI&lt;/button&gt;</pre>
+      </div>
+    </section>
 
-        <p>Body copy — AuraUI is a lightweight, plug-and-play CSS framework for building modern interfaces.
-          Use <code>au-text-muted</code> for secondary text or <code>au-font-bold</code> for emphasis.</p>
+    <section class="demo-section" id="utilities">
+      <div class="au-container">
+        <h2 class="demo-section-title">Utilities, motion, spacing, display, and visibility</h2>
+        <p class="demo-section-desc">
+          Backgrounds, rounded corners, overflow, position, spacing helpers, display utilities, responsive visibility, and animations.
+        </p>
 
-        <blockquote>Design is not just what it looks like and feels like. Design is how it works.</blockquote>
+        <div class="au-grid au-grid-auto au-mb-8">
+          <div class="au-card au-stack au-gap-4">
+            <p class="au-card-title">Backgrounds and rounded utilities</p>
+            <div class="au-grid au-grid-2 au-gap-4">
+              <div class="demo-swatch au-bg-base au-rounded-sm">au-bg-base + au-rounded-sm</div>
+              <div class="demo-swatch au-bg-alt au-rounded">au-bg-alt + au-rounded</div>
+              <div class="demo-swatch au-bg-surface au-rounded-lg">au-bg-surface + au-rounded-lg</div>
+              <div class="demo-swatch au-bg-primary au-rounded-xl">au-bg-primary + au-rounded-xl</div>
+              <div class="demo-swatch au-bg-gradient-primary au-rounded-full" style="min-height: 5.5rem;">au-bg-gradient-primary + au-rounded-full</div>
+              <div class="demo-swatch au-bg-mesh au-rounded-xl">au-bg-mesh</div>
+            </div>
+          </div>
 
-        <div class="au-divider-label">Code</div>
+          <div class="au-card au-stack au-gap-4">
+            <p class="au-card-title">Display, sizing, and flex helpers</p>
+            <div class="au-block au-bg-surface au-rounded au-p-4">au-block</div>
+            <div class="au-flex au-items-start au-gap-4 demo-utility-box au-p-4">
+              <span class="demo-chip au-shrink-0">au-shrink-0</span>
+              <div class="au-flex-1 au-bg-alt au-rounded-sm au-p-2">au-flex-1</div>
+              <div class="au-flex-auto au-bg-base au-rounded-sm au-p-2">au-flex-auto</div>
+            </div>
+            <div class="au-grid-d au-gap-2 au-bg-surface au-rounded au-p-4">
+              <div class="demo-chip">au-grid-d</div>
+              <div class="demo-chip au-w-full">au-w-full</div>
+              <div class="demo-chip">grid utility</div>
+            </div>
+            <div class="au-row au-items-end au-gap-2 demo-utility-box au-p-4" style="min-height: 5rem;">
+              <span class="demo-chip">au-items-end</span>
+              <span class="demo-chip">au-gap-2</span>
+              <span class="demo-chip">flex row</span>
+            </div>
+          </div>
 
-        <pre><code>/* Drop one file into any project */
-&lt;link rel="stylesheet" href="glass.css"&gt;</code></pre>
-      </section>
+          <div class="au-card au-stack au-gap-4">
+            <p class="au-card-title">Position, overflow, and truncation</p>
+            <div class="au-relative au-overflow-hidden au-rounded-xl au-bg-surface au-p-6" style="min-height: 8rem;">
+              <div class="au-absolute au-inset-0" aria-hidden="true" style="background: linear-gradient(135deg, rgba(124, 110, 248, 0.18), transparent 60%);"></div>
+              <div class="au-relative au-h-full au-row au-row-between au-row-center">
+                <span class="demo-chip">au-relative</span>
+                <span class="demo-chip">au-absolute + au-inset-0</span>
+              </div>
+            </div>
+            <div class="au-overflow-x-auto au-scrollbar au-rounded au-bg-surface au-p-4 demo-scroll-area">
+              <span class="au-font-mono">au-overflow-x-auto / au-scrollbar / au-truncate example: </span>
+              <span class="au-truncate demo-truncate-target" title="A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.">A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.</span>
+            </div>
+            <p class="au-text-sm au-text-muted">The <span class="au-code">au-truncate</span> utility needs a constrained width to clip text.</p>
+          </div>
+        </div>
 
-    </div><!-- /au-container -->
+        <div class="au-grid au-grid-auto au-mb-8">
+          <div class="au-card au-stack au-gap-4">
+            <p class="au-card-title">Spacing utilities</p>
+            <div class="au-p-0 au-bg-surface au-rounded">
+              <div class="demo-chip">au-p-0 outer edge</div>
+            </div>
+            <div class="au-p-2 au-bg-surface au-rounded-sm">au-p-2</div>
+            <div class="au-p-4 au-bg-surface au-rounded">au-p-4</div>
+            <div class="au-p-6 au-bg-surface au-rounded-lg">au-p-6</div>
+            <div class="au-p-8 au-bg-surface au-rounded-xl">au-p-8</div>
+            <div class="au-px-4 au-py-4 au-bg-surface au-rounded">au-px-4 + au-py-4</div>
+            <div class="au-px-6 au-py-6 au-bg-surface au-rounded">au-px-6 + au-py-6</div>
+          </div>
+
+          <div class="au-card au-stack au-gap-4">
+            <p class="au-card-title">Margin and gap utilities</p>
+            <div class="au-bg-surface au-rounded au-p-4">
+              <p class="au-m-0">au-m-0</p>
+              <div class="au-mt-2 demo-chip">au-mt-2</div>
+              <div class="au-mt-4 demo-chip">au-mt-4</div>
+              <div class="au-mt-6 demo-chip">au-mt-6</div>
+              <div class="au-mt-8 demo-chip">au-mt-8</div>
+            </div>
+            <div class="au-bg-surface au-rounded au-p-4">
+              <div class="demo-chip au-mb-2">au-mb-2</div>
+              <div class="demo-chip au-mb-4">au-mb-4</div>
+              <div class="demo-chip au-mb-6">au-mb-6</div>
+              <div class="demo-chip au-mb-8">au-mb-8</div>
+            </div>
+            <div class="au-cluster au-gap-6 au-bg-surface au-rounded au-p-4">
+              <span class="demo-chip">au-gap-6</span>
+              <span class="demo-chip">Cluster gap</span>
+            </div>
+            <div class="au-grid au-grid-2 au-gap-8 au-bg-surface au-rounded au-p-4">
+              <div class="demo-chip">au-gap-8</div>
+              <div class="demo-chip">Grid gap</div>
+            </div>
+          </div>
+
+          <div class="au-card au-stack au-gap-4">
+            <p class="au-card-title">Visibility and responsive helpers</p>
+            <div class="au-row au-row-center au-gap-4 au-bg-surface au-rounded au-p-4">
+              <span class="demo-chip">Visible sibling</span>
+              <span class="demo-chip au-invisible">au-invisible</span>
+              <span class="demo-chip">After invisible</span>
+            </div>
+            <p class="au-text-sm au-text-muted">An additional element using <span class="au-code">au-hidden</span> is present in the DOM but removed from layout.</p>
+            <span class="demo-chip au-hidden">au-hidden</span>
+            <div class="au-cluster">
+              <span class="au-badge au-badge-info au-hide-mobile">au-hide-mobile</span>
+              <span class="au-badge au-badge-warning au-hide-desktop">au-hide-desktop</span>
+            </div>
+            <div class="au-bg-surface au-rounded au-p-4 au-mx-auto" style="max-width: 14rem;">
+              <div class="demo-chip au-m-auto" style="width: 8rem;">au-m-auto</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="au-card">
+          <div class="au-card-header">
+            <span class="au-card-title">Animation utilities and skeletons</span>
+            <span class="au-badge au-badge-neutral">Respects reduced motion</span>
+          </div>
+          <div class="au-grid au-grid-4">
+            <div class="au-card au-card-sm au-text-center au-animate-pulse">
+              <span class="au-badge au-badge-primary">au-animate-pulse</span>
+            </div>
+            <div class="au-card au-card-sm au-text-center au-animate-slide-up">
+              <span class="au-badge au-badge-success">au-animate-slide-up</span>
+            </div>
+            <div class="au-card au-card-sm au-text-center au-animate-slide-down">
+              <span class="au-badge au-badge-info">au-animate-slide-down</span>
+            </div>
+            <div class="au-card au-card-sm au-text-center">
+              <span class="au-badge au-badge-warning au-animate-spin">↻</span>
+              <span class="au-badge au-badge-neutral">au-animate-spin</span>
+            </div>
+          </div>
+          <div class="au-divider-label">au-skeleton</div>
+          <div class="au-grid au-grid-3">
+            <div class="au-card au-card-sm">
+              <div class="au-skeleton au-rounded-full au-mb-4" style="width: 3rem; height: 3rem;"></div>
+              <div class="au-skeleton au-mb-2" style="height: 0.875rem; width: 70%;"></div>
+              <div class="au-skeleton" style="height: 0.875rem; width: 90%;"></div>
+            </div>
+            <div class="au-card au-card-sm">
+              <div class="au-skeleton au-mb-2" style="height: 1rem;"></div>
+              <div class="au-skeleton au-mb-2" style="height: 1rem; width: 80%;"></div>
+              <div class="au-skeleton" style="height: 1rem; width: 60%;"></div>
+            </div>
+            <div class="au-card au-card-sm">
+              <div class="au-skeleton au-rounded-lg au-h-full" style="min-height: 6rem;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- ─── FOOTER ─── -->
-  <footer class="au-py-8" style="border-top: 1px solid var(--au-border); text-align: center;">
-    <div class="au-container">
-      <p class="au-text-sm au-text-muted">
-        AuraUI — MIT License · Built with ♥ and pure CSS
-      </p>
+  <footer class="au-container au-py-6">
+    <div class="au-row au-row-between au-row-center au-row-collapse">
+      <p class="au-text-sm au-text-muted">AuraUI demo for <span class="au-code">glass.css</span></p>
+      <a href="https://github.com/akshayshah18193/auraui-css" class="au-btn au-btn-ghost au-btn-sm">GitHub</a>
     </div>
   </footer>
 
-  <!-- ─── THEME TOGGLE ─── -->
-  <button class="au-btn au-btn-glass au-btn-icon theme-toggle-btn"
-    onclick="document.body.classList.toggle('au-dark')"
-    aria-label="Toggle dark mode"
-    title="Toggle dark mode">
-    🌗
-  </button>
+  <button id="theme-toggle" class="au-btn au-btn-glass au-btn-icon au-fixed theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme" onclick="toggleTheme()">🌗</button>
 
-  <!-- Demo-only JS (tabs only) — not part of the framework -->
   <script>
-    function switchTab(btn, panelId) {
-      // Deactivate all tabs and panels in the same tablist
-      var tablist = btn.closest('[role="tablist"]');
-      tablist.querySelectorAll('.au-tab').forEach(function(t) {
-        t.classList.remove('au-active');
-        t.setAttribute('aria-selected', 'false');
+    const rangeInput = document.getElementById('demo-range');
+    const rangeValue = document.getElementById('range-value');
+    const themeToggle = document.getElementById('theme-toggle');
+
+    if (rangeInput && rangeValue) {
+      rangeInput.addEventListener('input', function() {
+        rangeValue.textContent = rangeInput.value;
       });
-      var container = tablist.parentElement;
-      container.querySelectorAll('.au-tab-panel').forEach(function(p) {
-        p.classList.remove('au-active');
-      });
-      // Activate clicked tab and its panel
-      btn.classList.add('au-active');
-      btn.setAttribute('aria-selected', 'true');
-      var panel = document.getElementById(panelId);
-      if (panel) { panel.classList.add('au-active'); }
     }
+
+    function updateThemeToggleLabel() {
+      if (!themeToggle) { return; }
+      const isLight = document.body.classList.contains('au-light');
+      const label = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.setAttribute('title', label);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('au-light');
+      updateThemeToggleLabel();
+    }
+
+    function switchTab(button, panelId, containerId) {
+      const tablist = button.parentElement;
+      const container = document.getElementById(containerId);
+
+      tablist.querySelectorAll('.au-tab').forEach(function(tab) {
+        tab.setAttribute('aria-selected', 'false');
+        tab.setAttribute('tabindex', '-1');
+      });
+
+      if (container) {
+        container.querySelectorAll('[data-tab-panel]').forEach(function(panel) {
+          panel.classList.add('au-hidden');
+        });
+      }
+
+      button.setAttribute('aria-selected', 'true');
+      button.setAttribute('tabindex', '0');
+
+      const nextPanel = document.getElementById(panelId);
+      if (nextPanel) {
+        nextPanel.classList.remove('au-hidden');
+      }
+    }
+
+    function handleTabKeydown(event, containerId) {
+      var keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+      if (keys.indexOf(event.key) === -1) { return; }
+      event.preventDefault();
+
+      const tabs = Array.from(event.currentTarget.parentElement.querySelectorAll('.au-tab'));
+      const currentIndex = tabs.indexOf(event.currentTarget);
+      var nextIndex = currentIndex;
+
+      if (event.key === 'ArrowRight') {
+        nextIndex = (currentIndex + 1) % tabs.length;
+      } else if (event.key === 'ArrowLeft') {
+        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      } else if (event.key === 'Home') {
+        nextIndex = 0;
+      } else if (event.key === 'End') {
+        nextIndex = tabs.length - 1;
+      }
+
+      const nextTab = tabs[nextIndex];
+      if (!nextTab) { return; }
+      nextTab.focus();
+      switchTab(nextTab, nextTab.getAttribute('aria-controls'), containerId);
+    }
+
+    updateThemeToggleLabel();
   </script>
 </body>
 </html>
