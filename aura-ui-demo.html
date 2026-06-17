@@ -81,6 +81,12 @@
       white-space: nowrap;
     }
 
+    .demo-truncate-target {
+      display: inline-block;
+      max-width: 18rem;
+      vertical-align: bottom;
+    }
+
     .demo-hero-note {
       max-width: 44rem;
     }
@@ -610,7 +616,7 @@
             <div>
               <p class="au-card-title au-mb-4">Tabs</p>
               <div class="au-tabs" role="tablist" aria-label="Product views">
-                <button id="tab-overview-tab" class="au-tab active" type="button" role="tab" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')">Overview</button>
+                <button id="tab-overview-tab" class="au-tab" type="button" role="tab" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')">Overview</button>
                 <button id="tab-reports-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')">Reports</button>
                 <button id="tab-settings-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')">Settings</button>
               </div>
@@ -629,7 +635,7 @@
             <div>
               <p class="au-card-title au-mb-4">Pill tabs</p>
               <div class="au-tabs au-tabs-pill" role="tablist" aria-label="Billing interval">
-                <button id="pill-monthly-tab" class="au-tab active" type="button" role="tab" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')">Monthly</button>
+                <button id="pill-monthly-tab" class="au-tab" type="button" role="tab" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')">Monthly</button>
                 <button id="pill-annual-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')">Annual</button>
               </div>
               <div id="tabs-pill" class="au-py-4">
@@ -826,7 +832,7 @@
             </div>
             <div class="au-overflow-x-auto au-scrollbar au-rounded au-bg-surface au-p-4 demo-scroll-area">
               <span class="au-font-mono">au-overflow-x-auto / au-scrollbar / au-truncate example: </span>
-              <span class="au-truncate" style="display: inline-block; max-width: 18rem; vertical-align: bottom;">A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.</span>
+              <span class="au-truncate demo-truncate-target">A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.</span>
             </div>
           </div>
         </div>
@@ -878,7 +884,7 @@
               <span class="demo-chip">After invisible</span>
             </div>
             <p class="au-text-sm au-text-muted">An additional element using <span class="au-code">au-hidden</span> is present in the DOM but removed from layout.</p>
-            <span class="demo-chip au-hidden" aria-hidden="true">au-hidden</span>
+            <span class="demo-chip au-hidden">au-hidden</span>
             <div class="au-cluster">
               <span class="au-badge au-badge-info au-hide-mobile">au-hide-mobile</span>
               <span class="au-badge au-badge-warning au-hide-desktop">au-hide-desktop</span>
@@ -954,7 +960,6 @@
       var container = document.getElementById(containerId);
 
       tablist.querySelectorAll('.au-tab').forEach(function(tab) {
-        tab.classList.remove('active');
         tab.setAttribute('aria-selected', 'false');
       });
 
@@ -964,7 +969,6 @@
         });
       }
 
-      button.classList.add('active');
       button.setAttribute('aria-selected', 'true');
 
       var nextPanel = document.getElementById(panelId);
