@@ -11,7 +11,7 @@
 - [ ] Demo / playground
 
 ## CSS-only checklist
-- [ ] No JavaScript added to `aura-ui.css`
+- [ ] No JavaScript added to `glass.css`
 - [ ] No external CSS dependencies
 - [ ] No preprocessor (Sass/Less) required
 - [ ] All values use existing or new `--au-*` tokens
