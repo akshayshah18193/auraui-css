@@ -39,7 +39,7 @@ for interactivity, but the framework itself stays pure CSS.
 ## File structure
 
 \`\`\`
-aura-ui.css           ← The framework. ONLY CSS goes here.
+glass.css           ← The framework. ONLY CSS goes here.
 aura-ui-demo.html     ← Static showcase
 aura-playground.html  ← Interactive customizer (JS allowed here, demo only)
 docs/                 ← Markdown documentation

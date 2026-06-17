@@ -3,7 +3,7 @@
    MIT License | https://github.com/akshayshah18193/auraui-css
    ============================================================
    Usage:
-     <link rel="stylesheet" href="glass.css">
+     &lt;link rel="stylesheet" href="glass.css"&gt;
      — or —
      import './glass.css'   (Vite / Webpack / Next.js etc.)
    ============================================================ */

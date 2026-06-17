@@ -35,7 +35,7 @@ Zero JavaScript dependencies. ~5 KB gzipped.
 ### 1. Plain HTML / static sites
 
 ```html
-<link rel="stylesheet" href="aura-ui.css">
+<link rel="stylesheet" href="glass.css">
 ```
 
 ### 2. Bundlers (Vite, Next.js, Webpack, Rollup, esbuild)
