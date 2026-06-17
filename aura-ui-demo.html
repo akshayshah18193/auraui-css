@@ -92,6 +92,7 @@
     }
 
     .theme-toggle-btn {
+      position: fixed;
       right: var(--au-space-6);
       bottom: var(--au-space-6);
       z-index: var(--au-z-toast);
@@ -616,9 +617,9 @@
             <div>
               <p class="au-card-title au-mb-4">Tabs</p>
               <div class="au-tabs" role="tablist" aria-label="Product views">
-                <button id="tab-overview-tab" class="au-tab" type="button" role="tab" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')">Overview</button>
-                <button id="tab-reports-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')">Reports</button>
-                <button id="tab-settings-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')">Settings</button>
+                <button id="tab-overview-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')">Overview</button>
+                <button id="tab-reports-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')">Reports</button>
+                <button id="tab-settings-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')">Settings</button>
               </div>
               <div id="tabs-standard" class="au-py-4">
                 <div id="tab-overview" role="tabpanel" aria-labelledby="tab-overview-tab" data-tab-panel>
@@ -635,8 +636,8 @@
             <div>
               <p class="au-card-title au-mb-4">Pill tabs</p>
               <div class="au-tabs au-tabs-pill" role="tablist" aria-label="Billing interval">
-                <button id="pill-monthly-tab" class="au-tab" type="button" role="tab" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')">Monthly</button>
-                <button id="pill-annual-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')">Annual</button>
+                <button id="pill-monthly-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')">Monthly</button>
+                <button id="pill-annual-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')">Annual</button>
               </div>
               <div id="tabs-pill" class="au-py-4">
                 <div id="pill-monthly" role="tabpanel" aria-labelledby="pill-monthly-tab" data-tab-panel>
@@ -834,6 +835,7 @@
               <span class="au-font-mono">au-overflow-x-auto / au-scrollbar / au-truncate example: </span>
               <span class="au-truncate demo-truncate-target">A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.</span>
             </div>
+            <p class="au-text-sm au-text-muted">The <span class="au-code">au-truncate</span> utility needs a constrained width to clip text.</p>
           </div>
         </div>
 
@@ -943,7 +945,7 @@
     </div>
   </footer>
 
-  <button class="au-btn au-btn-glass au-btn-icon au-fixed theme-toggle-btn" type="button" aria-label="Toggle light theme" title="Toggle light theme" onclick="document.body.classList.toggle('au-light')">🌗</button>
+  <button class="au-btn au-btn-glass au-btn-icon au-fixed theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme" onclick="document.body.classList.toggle('au-light')">🌗</button>
 
   <script>
     var rangeInput = document.getElementById('demo-range');
@@ -961,6 +963,7 @@
 
       tablist.querySelectorAll('.au-tab').forEach(function(tab) {
         tab.setAttribute('aria-selected', 'false');
+        tab.setAttribute('tabindex', '-1');
       });
 
       if (container) {
@@ -970,6 +973,7 @@
       }
 
       button.setAttribute('aria-selected', 'true');
+      button.setAttribute('tabindex', '0');
 
       var nextPanel = document.getElementById(panelId);
       if (nextPanel) {
