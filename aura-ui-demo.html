@@ -130,7 +130,7 @@
           <div class="au-cluster au-justify-center">
             <a href="#glass" class="au-btn au-btn-primary au-btn-lg">Explore classes</a>
             <a href="#utilities" class="au-btn au-btn-glass au-btn-lg">See utilities</a>
-            <button class="au-btn au-btn-outline au-btn-lg au-btn-pill" type="button">Accessible focus styles</button>
+            <button class="au-btn au-btn-outline au-btn-lg au-btn-pill" type="button">Try keyboard navigation</button>
           </div>
           <div class="au-cluster au-justify-center">
             <span class="au-text-sm au-text-muted">⚡ One stylesheet</span>
@@ -469,7 +469,7 @@
             <div class="au-form-group">
               <label class="au-label au-row au-row-between au-row-center" for="demo-range">
                 <span>Range slider</span>
-                <span class="au-text-sm au-text-muted"><span id="range-value">72</span>%</span>
+                <span class="au-text-sm au-text-muted"><span id="range-value" aria-live="polite">72</span>%</span>
               </label>
               <input id="demo-range" class="au-range" type="range" min="0" max="100" value="72">
             </div>
@@ -549,6 +549,7 @@
               </div>
             </div>
           </div>
+          <p class="au-text-sm au-text-muted au-mt-4">Demo iconography uses emoji for brevity; production interfaces should prefer labeled SVG icons.</p>
           <div class="au-card-footer au-justify-between">
             <span class="au-text-sm au-text-muted">au-card-footer uses flex alignment helpers for action layouts.</span>
             <div class="au-flex au-gap-2 au-justify-end">
@@ -617,9 +618,9 @@
             <div>
               <p class="au-card-title au-mb-4">Tabs</p>
               <div class="au-tabs" role="tablist" aria-label="Product views">
-                <button id="tab-overview-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')">Overview</button>
-                <button id="tab-reports-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')">Reports</button>
-                <button id="tab-settings-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')">Settings</button>
+                <button id="tab-overview-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')" onkeydown="handleTabKeydown(event, 'tabs-standard')">Overview</button>
+                <button id="tab-reports-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')" onkeydown="handleTabKeydown(event, 'tabs-standard')">Reports</button>
+                <button id="tab-settings-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')" onkeydown="handleTabKeydown(event, 'tabs-standard')">Settings</button>
               </div>
               <div id="tabs-standard" class="au-py-4">
                 <div id="tab-overview" role="tabpanel" aria-labelledby="tab-overview-tab" data-tab-panel>
@@ -636,8 +637,8 @@
             <div>
               <p class="au-card-title au-mb-4">Pill tabs</p>
               <div class="au-tabs au-tabs-pill" role="tablist" aria-label="Billing interval">
-                <button id="pill-monthly-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')">Monthly</button>
-                <button id="pill-annual-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')">Annual</button>
+                <button id="pill-monthly-tab" class="au-tab" type="button" role="tab" tabindex="0" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')" onkeydown="handleTabKeydown(event, 'tabs-pill')">Monthly</button>
+                <button id="pill-annual-tab" class="au-tab" type="button" role="tab" tabindex="-1" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')" onkeydown="handleTabKeydown(event, 'tabs-pill')">Annual</button>
               </div>
               <div id="tabs-pill" class="au-py-4">
                 <div id="pill-monthly" role="tabpanel" aria-labelledby="pill-monthly-tab" data-tab-panel>
@@ -833,7 +834,7 @@
             </div>
             <div class="au-overflow-x-auto au-scrollbar au-rounded au-bg-surface au-p-4 demo-scroll-area">
               <span class="au-font-mono">au-overflow-x-auto / au-scrollbar / au-truncate example: </span>
-              <span class="au-truncate demo-truncate-target">A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.</span>
+              <span class="au-truncate demo-truncate-target" title="A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.">A very long utility label that intentionally truncates to demonstrate au-truncate within a constrained inline block.</span>
             </div>
             <p class="au-text-sm au-text-muted">The <span class="au-code">au-truncate</span> utility needs a constrained width to clip text.</p>
           </div>
@@ -945,16 +946,30 @@
     </div>
   </footer>
 
-  <button class="au-btn au-btn-glass au-btn-icon au-fixed theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme" onclick="document.body.classList.toggle('au-light')">🌗</button>
+  <button id="theme-toggle" class="au-btn au-btn-glass au-btn-icon au-fixed theme-toggle-btn" type="button" aria-label="Toggle theme" title="Toggle theme" onclick="toggleTheme()">🌗</button>
 
   <script>
     var rangeInput = document.getElementById('demo-range');
     var rangeValue = document.getElementById('range-value');
+    var themeToggle = document.getElementById('theme-toggle');
 
     if (rangeInput && rangeValue) {
       rangeInput.addEventListener('input', function() {
         rangeValue.textContent = rangeInput.value;
       });
+    }
+
+    function updateThemeToggleLabel() {
+      if (!themeToggle) { return; }
+      var isLight = document.body.classList.contains('au-light');
+      var label = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.setAttribute('title', label);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('au-light');
+      updateThemeToggleLabel();
     }
 
     function switchTab(button, panelId, containerId) {
@@ -980,6 +995,33 @@
         nextPanel.classList.remove('au-hidden');
       }
     }
+
+    function handleTabKeydown(event, containerId) {
+      var keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+      if (keys.indexOf(event.key) === -1) { return; }
+      event.preventDefault();
+
+      var tabs = Array.prototype.slice.call(event.currentTarget.parentElement.querySelectorAll('.au-tab'));
+      var currentIndex = tabs.indexOf(event.currentTarget);
+      var nextIndex = currentIndex;
+
+      if (event.key === 'ArrowRight') {
+        nextIndex = (currentIndex + 1) % tabs.length;
+      } else if (event.key === 'ArrowLeft') {
+        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      } else if (event.key === 'Home') {
+        nextIndex = 0;
+      } else if (event.key === 'End') {
+        nextIndex = tabs.length - 1;
+      }
+
+      var nextTab = tabs[nextIndex];
+      if (!nextTab) { return; }
+      nextTab.focus();
+      switchTab(nextTab, nextTab.getAttribute('aria-controls'), containerId);
+    }
+
+    updateThemeToggleLabel();
   </script>
 </body>
 </html>
