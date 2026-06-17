@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AuraUI — A lightweight, token-driven CSS framework with glass morphism, flexible layouts, and a complete form kit.">
+  <title>AuraUI — Lightweight CSS Framework</title>
+  <link rel="stylesheet" href="aura-ui.css">
+  <style>
+    /* Landing-page only styles */
+    .landing-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--au-space-8) var(--au-space-4);
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 0%, rgba(124, 110, 248, 0.25) 0%, transparent 70%),
+                  linear-gradient(180deg, #e8e4fe 0%, #fce4f0 50%, #e0f7fa 100%);
+    }
+
+    .landing-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(124, 110, 248, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(240, 98, 146, 0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .landing-title {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #7c6ef8 0%, #f06292 60%, #26c6da 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--au-space-4);
+    }
+
+    .landing-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--au-text-muted);
+      max-width: 42rem;
+      margin-bottom: var(--au-space-8);
+      line-height: 1.7;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: var(--au-space-3);
+      display: block;
+    }
+
+    .code-snippet {
+      background: rgba(14, 12, 26, 0.85);
+      color: #c3b6fc;
+      font-family: var(--au-font-mono);
+      font-size: 0.9rem;
+      padding: var(--au-space-5) var(--au-space-6);
+      border-radius: var(--au-radius-lg);
+      text-align: left;
+      display: inline-block;
+      max-width: 100%;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    .code-snippet .c-tag  { color: #f8b4d9; }
+    .code-snippet .c-attr { color: #a5d8f3; }
+    .code-snippet .c-val  { color: #b9f5c8; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <header class="au-navbar">
+    <nav class="au-nav au-container">
+      <a href="index.html" class="au-nav-brand">✦ AuraUI</a>
+      <a href="aura-ui-demo.html"   class="au-nav-link">Components</a>
+      <a href="aura-playground.html" class="au-nav-link">Playground</a>
+      <a href="https://github.com/akshayshah18193/auraui-css" class="au-nav-link" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <!-- ─── HERO ─── -->
+  <section class="landing-hero">
+    <div style="position: relative; z-index: 1; width: 100%;">
+      <span class="au-badge au-badge-primary" style="margin-bottom: var(--au-space-4); display: inline-block;">v1.0.0 · MIT License</span>
+      <h1 class="landing-title">AuraUI</h1>
+      <p class="landing-sub au-mx-auto">
+        A lightweight, plug-and-play CSS framework for building modern interfaces
+        with glass morphism, token-driven theming, a complete form kit, and a responsive
+        layout system. Zero JavaScript dependencies — drop one file into any project.
+      </p>
+
+      <div style="display: flex; gap: var(--au-space-3); justify-content: center; flex-wrap: wrap; margin-bottom: var(--au-space-10);">
+        <a href="aura-ui-demo.html"    class="au-btn au-btn-primary au-btn-lg">View Components</a>
+        <a href="aura-playground.html" class="au-btn au-btn-outline au-btn-lg">Open Playground</a>
+      </div>
+
+      <div class="code-snippet au-mx-auto">
+        <span class="c-tag">&lt;link</span>
+        <span class="c-attr"> rel=</span><span class="c-val">"stylesheet"</span>
+        <span class="c-attr"> href=</span><span class="c-val">"aura-ui.css"</span><span class="c-tag">&gt;</span><br>
+        <span style="color: #6b6a7a; font-size: 0.8em;">/* That's it. No build step, no JS, no dependencies. */</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES ─── -->
+  <section class="au-section" style="background: var(--au-bg);">
+    <div class="au-container">
+      <h2 class="au-text-center au-mb-2">Everything you need</h2>
+      <p class="au-text-center au-text-muted au-mb-10" style="max-width: 38rem; margin-inline: auto;">
+        A full component library in a single CSS file, designed to be dropped into any project.
+      </p>
+
+      <div class="au-grid au-grid-auto">
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">🪟</span>
+          <h4 class="au-mb-2">Glass Morphism</h4>
+          <p class="au-text-sm au-text-muted">
+            Three glass tiers (<code>au-glass-sm</code>, <code>au-glass</code>, <code>au-glass-lg</code>)
+            with configurable blur and opacity via CSS custom properties.
+          </p>
+        </div>
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">📝</span>
+          <h4 class="au-mb-2">Complete Form Kit</h4>
+          <p class="au-text-sm au-text-muted">
+            Inputs, selects, checkboxes, radios, toggles, sliders, file uploads,
+            and all validation states — fully accessible.
+          </p>
+        </div>
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">🧩</span>
+          <h4 class="au-mb-2">Responsive Layout</h4>
+          <p class="au-text-sm au-text-muted">
+            Responsive grid, flex utilities, auto-fit columns, and a 12-column
+            system — all in pure CSS, no framework required.
+          </p>
+        </div>
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">🎨</span>
+          <h4 class="au-mb-2">Token-Driven</h4>
+          <p class="au-text-sm au-text-muted">
+            Every color, radius, and spacing value is a CSS custom property.
+            Theme the whole system from one <code>:root</code> block.
+          </p>
+        </div>
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">🌗</span>
+          <h4 class="au-mb-2">Dark + Light Themes</h4>
+          <p class="au-text-sm au-text-muted">
+            Toggle between light and dark themes with a single <code>au-dark</code> class
+            on the body element. No JavaScript needed.
+          </p>
+        </div>
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">🎛️</span>
+          <h4 class="au-mb-2">Live Playground</h4>
+          <p class="au-text-sm au-text-muted">
+            Visual customizer to design your theme and export it as a ready-to-use
+            CSS override file. Instant live preview.
+          </p>
+        </div>
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">📦</span>
+          <h4 class="au-mb-2">~5 KB Gzipped</h4>
+          <p class="au-text-sm au-text-muted">
+            No dependencies, no build step, no runtime. One CSS file, works anywhere —
+            plain HTML, React, Vue, Svelte, Angular, or any bundler.
+          </p>
+        </div>
+
+        <div class="au-card au-card-hover au-p-6">
+          <span class="feature-icon">♿</span>
+          <h4 class="au-mb-2">Accessible by Default</h4>
+          <p class="au-text-sm au-text-muted">
+            Focus rings on every interactive element, reduced-motion support,
+            and semantic markup patterns baked in.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── QUICK START ─── -->
+  <section class="au-section" style="background: var(--au-surface);">
+    <div class="au-container au-container-md">
+      <h2 class="au-text-center au-mb-2">Quick start</h2>
+      <p class="au-text-center au-text-muted au-mb-8">Add AuraUI to any project in seconds.</p>
+
+      <div class="au-grid au-grid-cols-1" style="gap: var(--au-space-5);">
+
+        <div class="au-card">
+          <div class="au-card-header">1 · HTML (CDN or local file)</div>
+          <div class="au-card-body">
+            <pre><code>&lt;link rel="stylesheet" href="aura-ui.css"&gt;</code></pre>
+          </div>
+        </div>
+
+        <div class="au-card">
+          <div class="au-card-header">2 · Use components</div>
+          <div class="au-card-body">
+            <pre><code>&lt;button class="au-btn au-btn-primary"&gt;Get started&lt;/button&gt;
+
+&lt;div class="au-glass au-p-6"&gt;
+  &lt;h3&gt;Glass card&lt;/h3&gt;
+  &lt;p&gt;Frosted-glass surface.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;input class="au-input" type="text" placeholder="Type here…"&gt;</code></pre>
+          </div>
+        </div>
+
+        <div class="au-card">
+          <div class="au-card-header">3 · Customise tokens (optional)</div>
+          <div class="au-card-body">
+            <pre><code>/* Override any token in your own stylesheet */
+:root {
+  --au-color-primary: #0ea5e9;   /* sky blue */
+  --au-radius-lg: 20px;          /* rounder cards */
+  --au-glass-blur: 24px;         /* heavier glass */
+}</code></pre>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="au-text-center au-mt-8">
+        <a href="aura-ui-demo.html" class="au-btn au-btn-primary au-btn-lg">Browse all components →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="au-section au-bg-gradient-primary">
+    <div class="au-container au-text-center">
+      <h2 style="color: #fff;" class="au-mb-4">Start building today</h2>
+      <p style="color: rgba(255,255,255,0.80); max-width: 32rem; margin-inline: auto;" class="au-mb-8">
+        One CSS file. Zero dependencies. Endless possibilities.
+      </p>
+      <div style="display: flex; gap: var(--au-space-3); justify-content: center; flex-wrap: wrap;">
+        <a href="aura-ui-demo.html"    class="au-btn au-btn-lg"  style="background: #fff; color: var(--au-color-primary);">View Demo</a>
+        <a href="aura-playground.html" class="au-btn au-btn-lg au-btn-glass">Open Playground</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="au-py-8" style="border-top: 1px solid var(--au-border); text-align: center;">
+    <div class="au-container">
+      <p class="au-text-sm au-text-muted">
+        AuraUI · MIT License ·
+        <a href="https://github.com/akshayshah18193/auraui-css" target="_blank" rel="noopener">GitHub</a> ·
+        Built with ♥ and pure CSS
+      </p>
+    </div>
+  </footer>
+
+  <!-- Dark-mode toggle -->
+  <button class="au-btn au-btn-glass au-btn-icon"
+    style="position: fixed; bottom: var(--au-space-6); right: var(--au-space-6); z-index: 999;"
+    onclick="document.body.classList.toggle('au-dark')"
+    aria-label="Toggle dark mode"
+    title="Toggle dark mode">
+    🌗
+  </button>
+
+</body>
+</html>
