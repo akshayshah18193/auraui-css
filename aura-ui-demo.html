@@ -538,7 +538,7 @@
               <div class="au-cluster">
                 <button class="au-btn au-btn-success au-btn-loading" type="button">Saving</button>
                 <button class="au-btn au-btn-secondary" type="button" disabled>Disabled</button>
-                <a class="au-btn au-btn-outline" href="#buttons" aria-disabled="true">aria-disabled</a>
+                <button class="au-btn au-btn-outline" type="button" disabled>Disabled button</button>
               </div>
             </div>
           </div>
@@ -610,18 +610,18 @@
             <div>
               <p class="au-card-title au-mb-4">Tabs</p>
               <div class="au-tabs" role="tablist" aria-label="Product views">
-                <button class="au-tab active" type="button" role="tab" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')">Overview</button>
-                <button class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')">Reports</button>
-                <button class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')">Settings</button>
+                <button id="tab-overview-tab" class="au-tab active" type="button" role="tab" aria-selected="true" aria-controls="tab-overview" onclick="switchTab(this, 'tab-overview', 'tabs-standard')">Overview</button>
+                <button id="tab-reports-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-reports" onclick="switchTab(this, 'tab-reports', 'tabs-standard')">Reports</button>
+                <button id="tab-settings-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="tab-settings" onclick="switchTab(this, 'tab-settings', 'tabs-standard')">Settings</button>
               </div>
               <div id="tabs-standard" class="au-py-4">
-                <div id="tab-overview" data-tab-panel>
+                <div id="tab-overview" role="tabpanel" aria-labelledby="tab-overview-tab" data-tab-panel>
                   <p class="au-text-sm">Standard tabs use the <span class="au-code">active</span> state or <span class="au-code">aria-selected=&quot;true&quot;</span>.</p>
                 </div>
-                <div id="tab-reports" class="au-hidden" data-tab-panel>
+                <div id="tab-reports" class="au-hidden" role="tabpanel" aria-labelledby="tab-reports-tab" data-tab-panel>
                   <p class="au-text-sm">Report metrics, snapshots, and performance views live here.</p>
                 </div>
-                <div id="tab-settings" class="au-hidden" data-tab-panel>
+                <div id="tab-settings" class="au-hidden" role="tabpanel" aria-labelledby="tab-settings-tab" data-tab-panel>
                   <p class="au-text-sm">Settings panels keep controls grouped and easy to scan.</p>
                 </div>
               </div>
@@ -629,14 +629,14 @@
             <div>
               <p class="au-card-title au-mb-4">Pill tabs</p>
               <div class="au-tabs au-tabs-pill" role="tablist" aria-label="Billing interval">
-                <button class="au-tab active" type="button" role="tab" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')">Monthly</button>
-                <button class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')">Annual</button>
+                <button id="pill-monthly-tab" class="au-tab active" type="button" role="tab" aria-selected="true" aria-controls="pill-monthly" onclick="switchTab(this, 'pill-monthly', 'tabs-pill')">Monthly</button>
+                <button id="pill-annual-tab" class="au-tab" type="button" role="tab" aria-selected="false" aria-controls="pill-annual" onclick="switchTab(this, 'pill-annual', 'tabs-pill')">Annual</button>
               </div>
               <div id="tabs-pill" class="au-py-4">
-                <div id="pill-monthly" data-tab-panel>
+                <div id="pill-monthly" role="tabpanel" aria-labelledby="pill-monthly-tab" data-tab-panel>
                   <p class="au-text-sm">The monthly plan provides flexibility for short-term teams.</p>
                 </div>
-                <div id="pill-annual" class="au-hidden" data-tab-panel>
+                <div id="pill-annual" class="au-hidden" role="tabpanel" aria-labelledby="pill-annual-tab" data-tab-panel>
                   <p class="au-text-sm">Annual billing lowers cost for long-lived design systems.</p>
                 </div>
               </div>
