@@ -1,0 +1,27 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "selector-class-pattern": ["^(au-[a-z0-9-]+|active)$", {
+      "message": "Class names should use au- prefix (except .active)"
+    }],
+    "custom-property-pattern": "^au-[a-z0-9-]+$",
+    "alpha-value-notation": "number",
+    "color-function-notation": "modern",
+    "color-hex-length": null,
+    "value-keyword-case": null,
+    "custom-property-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "rule-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "declaration-block-single-line-max-declarations": null,
+    "media-feature-range-notation": null,
+    "property-no-unknown": [true, {
+      "ignoreProperties": ["composes"]
+    }],
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": null,
+    "selector-no-vendor-prefix": null,
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null
+  }
+}

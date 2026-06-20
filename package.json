@@ -1,0 +1,21 @@
+{
+  "name": "auraui-css",
+  "version": "1.0.0",
+  "description": "A plug-and-play CSS framework with glass morphism",
+  "scripts": {
+    "test": "npm run test:css && npm run test:visual",
+    "test:css": "stylelint \"*.css\"",
+    "test:visual": "playwright test",
+    "test:visual:ui": "playwright test --ui",
+    "test:visual:update": "playwright test --update-snapshots",
+    "lint:css": "stylelint \"*.css\" --fix"
+  },
+  "keywords": ["css", "framework", "glass-morphism", "ui"],
+  "author": "Akshay Shah",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "stylelint": "^16.6.1",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}
