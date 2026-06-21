@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="glass.css">
   <style>
     /* Landing-page only styles */
+    body {
+      background: linear-gradient(135deg, #0a0f1e 0%, #161d30 50%, #0a0f1e 100%);
+    }
+    
     .landing-hero {
       min-height: 100vh;
       display: flex;
@@ -18,8 +22,6 @@
       padding: var(--au-space-8) var(--au-space-4);
       position: relative;
       overflow: hidden;
-      background: radial-gradient(ellipse at 50% 0%, rgba(124, 110, 248, 0.25) 0%, transparent 70%),
-                  linear-gradient(180deg, #e8e4fe 0%, #fce4f0 50%, #e0f7fa 100%);
     }
 
     .landing-hero::before {
@@ -27,29 +29,43 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 20%, rgba(124, 110, 248, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(240, 98, 146, 0.15) 0%, transparent 50%);
+        radial-gradient(circle at 30% 20%, rgba(124, 110, 248, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(45, 212, 167, 0.15) 0%, transparent 50%);
       pointer-events: none;
+      animation: pulse 15s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
     }
 
     .landing-title {
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      background: linear-gradient(135deg, #7c6ef8 0%, #f06292 60%, #26c6da 100%);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(135deg, #7c6ef8 0%, #38bdf8 50%, #2dd4a7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: var(--au-space-4);
+      margin-bottom: var(--au-space-6);
+      text-shadow: 0 0 80px rgba(124, 110, 248, 0.3);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
     }
 
     .landing-sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: var(--au-text-muted);
-      max-width: 42rem;
-      margin-bottom: var(--au-space-8);
-      line-height: 1.7;
+      font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+      color: var(--au-text);
+      max-width: 48rem;
+      margin-bottom: var(--au-space-10);
+      line-height: 1.8;
+      opacity: 0.9;
     }
 
     .feature-icon {
@@ -59,22 +75,40 @@
     }
 
     .code-snippet {
-      background: rgba(14, 12, 26, 0.85);
-      color: #c3b6fc;
+      position: relative;
+      background: linear-gradient(135deg, rgba(22, 29, 48, 0.95) 0%, rgba(10, 15, 30, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(124, 110, 248, 0.3);
+      color: #e8ecff;
       font-family: var(--au-font-mono);
-      font-size: 0.9rem;
-      padding: var(--au-space-5) var(--au-space-6);
-      border-radius: var(--au-radius-lg);
+      font-size: 0.95rem;
+      padding: var(--au-space-6) var(--au-space-8);
+      border-radius: var(--au-radius-xl);
       text-align: left;
       display: inline-block;
       max-width: 100%;
       overflow-x: auto;
-      line-height: 1.7;
+      line-height: 1.8;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .code-snippet::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 30%;
+      background: linear-gradient(180deg, rgba(124, 110, 248, 0.1) 0%, transparent 100%);
+      border-radius: var(--au-radius-xl) var(--au-radius-xl) 0 0;
+      pointer-events: none;
     }
 
-    .code-snippet .c-tag  { color: #f8b4d9; }
-    .code-snippet .c-attr { color: #a5d8f3; }
-    .code-snippet .c-val  { color: #b9f5c8; }
+    .code-snippet .c-tag  { color: #7c6ef8; font-weight: 600; }
+    .code-snippet .c-attr { color: #38bdf8; }
+    .code-snippet .c-val  { color: #2dd4a7; }
   </style>
 </head>
 <body>
@@ -91,108 +125,117 @@
 
   <!-- ─── HERO ─── -->
   <section class="landing-hero">
-    <div style="position: relative; z-index: 1; width: 100%;">
-      <span class="au-badge au-badge-primary" style="margin-bottom: var(--au-space-4); display: inline-block;">v1.0.0 · MIT License</span>
+    <div style="position: relative; z-index: 1; width: 100%; max-width: 68rem;">
+      <div style="display: inline-flex; align-items: center; gap: var(--au-space-2); padding: var(--au-space-2) var(--au-space-4); background: linear-gradient(135deg, rgba(124, 110, 248, 0.2) 0%, rgba(124, 110, 248, 0.1) 100%); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(124, 110, 248, 0.3); border-radius: var(--au-radius-full); margin-bottom: var(--au-space-8);">
+        <span style="font-size: var(--au-text-xs); font-weight: 600; color: var(--au-primary);">✨ v1.0.0</span>
+        <span style="font-size: var(--au-text-xs); color: var(--au-text-muted);">•</span>
+        <span style="font-size: var(--au-text-xs); color: var(--au-text-muted);">MIT License</span>
+      </div>
+      
       <h1 class="landing-title">AuraUI</h1>
-      <p class="landing-sub au-mx-auto">
-        A lightweight, plug-and-play CSS framework for building modern interfaces
-        with glass morphism, token-driven theming, a complete form kit, and a responsive
-        layout system. Zero JavaScript dependencies — drop one file into any project.
+      <p class="landing-sub">
+        A lightweight, plug-and-play CSS framework for building stunning modern interfaces
+        with realistic glass morphism, token-driven theming, and a complete component library.
+        <strong style="color: var(--au-primary);">Zero JavaScript. One file. Infinite possibilities.</strong>
       </p>
 
-      <div style="display: flex; gap: var(--au-space-3); justify-content: center; flex-wrap: wrap; margin-bottom: var(--au-space-10);">
-        <a href="aura-ui-demo.html"    class="au-btn au-btn-primary au-btn-lg">View Components</a>
-        <a href="aura-playground.html" class="au-btn au-btn-outline au-btn-lg">Open Playground</a>
+      <div style="display: flex; gap: var(--au-space-4); justify-content: center; flex-wrap: wrap; margin-bottom: var(--au-space-12);">
+        <a href="aura-ui-demo.html" class="au-btn au-btn-primary au-btn-lg" style="min-width: 180px;">
+          <span>View Components</span>
+        </a>
+        <a href="aura-playground.html" class="au-btn au-btn-glass au-btn-lg" style="min-width: 180px;">
+          <span>Try Playground</span>
+        </a>
       </div>
 
-      <div class="code-snippet au-mx-auto">
+      <div class="code-snippet">
         <span class="c-tag">&lt;link</span>
         <span class="c-attr"> rel=</span><span class="c-val">"stylesheet"</span>
         <span class="c-attr"> href=</span><span class="c-val">"glass.css"</span><span class="c-tag">&gt;</span><br>
-        <span style="color: #6b6a7a; font-size: 0.8em;">/* That's it. No build step, no JS, no dependencies. */</span>
+        <span style="color: var(--au-text-muted); font-size: 0.875em; font-style: italic;">/* That's it. No build step, no dependencies, pure CSS magic. */</span>
       </div>
     </div>
   </section>
 
   <!-- ─── FEATURES ─── -->
-  <section class="au-section" style="background: var(--au-bg);">
+  <section class="au-section" style="background: var(--au-bg); padding-block: clamp(4rem, 8vw, 7rem);">
     <div class="au-container">
-      <h2 class="au-text-center au-mb-2">Everything you need</h2>
-      <p class="au-text-center au-text-muted au-mb-10" style="max-width: 38rem; margin-inline: auto;">
-        A full component library in a single CSS file, designed to be dropped into any project.
+      <h2 class="au-text-center au-mb-3" style="font-size: var(--au-text-4xl); font-weight: 800;">Everything you need</h2>
+      <p class="au-text-center au-text-muted au-mb-12" style="max-width: 42rem; margin-inline: auto; font-size: var(--au-text-lg);">
+        A complete component library in a single CSS file. No compromises, no dependencies.
       </p>
 
-      <div class="au-grid au-grid-auto">
+      <div class="au-grid au-grid-auto" style="gap: var(--au-space-6);">
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">🪟</span>
-          <h4 class="au-mb-2">Glass Morphism</h4>
-          <p class="au-text-sm au-text-muted">
-            Three glass tiers (<code>au-glass-sm</code>, <code>au-glass</code>, <code>au-glass-lg</code>)
-            with configurable blur and opacity via CSS custom properties.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">🪟</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">Glass Morphism</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            Three glass tiers with multi-layer gradients, realistic borders, and highlight overlays
+            for authentic frosted-glass effects. Fully customizable via CSS tokens.
           </p>
         </div>
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">📝</span>
-          <h4 class="au-mb-2">Complete Form Kit</h4>
-          <p class="au-text-sm au-text-muted">
-            Inputs, selects, checkboxes, radios, toggles, sliders, file uploads,
-            and all validation states — fully accessible.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">📝</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">Complete Form Kit</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            Inputs, selects, checkboxes, radios, toggles, sliders, and file uploads
+            with validation states — all fully accessible and keyboard-navigable.
           </p>
         </div>
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">🧩</span>
-          <h4 class="au-mb-2">Responsive Layout</h4>
-          <p class="au-text-sm au-text-muted">
-            Responsive grid, flex utilities, auto-fit columns, and a 12-column
-            system — all in pure CSS, no framework required.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">🧩</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">Responsive Layout</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            Flexible grid, auto-fit columns, and a 12-column system with
+            mobile-first breakpoints. Build any layout, pure CSS.
           </p>
         </div>
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">🎨</span>
-          <h4 class="au-mb-2">Token-Driven</h4>
-          <p class="au-text-sm au-text-muted">
-            Every color, radius, and spacing value is a CSS custom property.
-            Theme the whole system from one <code>:root</code> block.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">🎨</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">Token-Driven</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            Every color, radius, spacing, and effect is a CSS custom property.
+            Create your perfect theme from a single <code>:root</code> block.
           </p>
         </div>
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">🌗</span>
-          <h4 class="au-mb-2">Dark + Light Themes</h4>
-          <p class="au-text-sm au-text-muted">
-            Toggle between light and dark themes with a single <code>au-dark</code> class
-            on the body element. No JavaScript needed.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">🌗</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">Dark + Light Themes</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            Toggle between themes with a single class. All components
+            adapt automatically with proper contrast ratios.
           </p>
         </div>
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">🎛️</span>
-          <h4 class="au-mb-2">Live Playground</h4>
-          <p class="au-text-sm au-text-muted">
-            Visual customizer to design your theme and export it as a ready-to-use
-            CSS override file. Instant live preview.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">🎛️</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">Live Playground</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            Visual customizer with instant preview. Design your theme
+            and export ready-to-use CSS overrides.
           </p>
         </div>
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">📦</span>
-          <h4 class="au-mb-2">~5 KB Gzipped</h4>
-          <p class="au-text-sm au-text-muted">
-            No dependencies, no build step, no runtime. One CSS file, works anywhere —
-            plain HTML, React, Vue, Svelte, Angular, or any bundler.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">📦</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">~5 KB Gzipped</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            Tiny footprint, zero dependencies. Works with plain HTML, React,
+            Vue, Svelte, Angular, or any bundler.
           </p>
         </div>
 
-        <div class="au-card au-card-hover au-p-6">
-          <span class="feature-icon">♿</span>
-          <h4 class="au-mb-2">Accessible by Default</h4>
-          <p class="au-text-sm au-text-muted">
-            Focus rings on every interactive element, reduced-motion support,
-            and semantic markup patterns baked in.
+        <div class="au-glass au-p-8" style="transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+          <span class="feature-icon" style="font-size: 2.5rem;">♿</span>
+          <h4 class="au-mb-3" style="font-size: var(--au-text-xl); font-weight: 700;">Accessible</h4>
+          <p class="au-text-sm au-text-muted" style="line-height: 1.7;">
+            WCAG AA compliant with focus rings, reduced-motion support,
+            and semantic markup patterns built in.
           </p>
         </div>
 
@@ -250,15 +293,16 @@
   </section>
 
   <!-- ─── CTA ─── -->
-  <section class="au-section au-bg-gradient-primary">
-    <div class="au-container au-text-center">
-      <h2 style="color: #fff;" class="au-mb-4">Start building today</h2>
-      <p style="color: rgba(255,255,255,0.80); max-width: 32rem; margin-inline: auto;" class="au-mb-8">
-        One CSS file. Zero dependencies. Endless possibilities.
+  <section class="au-section" style="background: linear-gradient(135deg, rgba(124, 110, 248, 0.15) 0%, rgba(45, 212, 167, 0.1) 100%); padding-block: clamp(5rem, 10vw, 8rem); position: relative; overflow: hidden;">
+    <div style="position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(124, 110, 248, 0.2) 0%, transparent 70%); pointer-events: none;"></div>
+    <div class="au-container au-text-center" style="position: relative; z-index: 1;">
+      <h2 style="color: var(--au-text); font-size: var(--au-text-4xl); font-weight: 800;" class="au-mb-5">Start building today</h2>
+      <p style="color: var(--au-text-muted); max-width: 36rem; margin-inline: auto; font-size: var(--au-text-lg); line-height: 1.7;" class="au-mb-10">
+        One CSS file. Zero dependencies. Infinite possibilities.
       </p>
-      <div style="display: flex; gap: var(--au-space-3); justify-content: center; flex-wrap: wrap;">
-        <a href="aura-ui-demo.html"    class="au-btn au-btn-lg"  style="background: #fff; color: var(--au-color-primary);">View Demo</a>
-        <a href="aura-playground.html" class="au-btn au-btn-lg au-btn-glass">Open Playground</a>
+      <div style="display: flex; gap: var(--au-space-4); justify-content: center; flex-wrap: wrap;">
+        <a href="aura-ui-demo.html" class="au-btn au-btn-primary au-btn-lg" style="min-width: 180px;">View Demo</a>
+        <a href="aura-playground.html" class="au-btn au-btn-glass au-btn-lg" style="min-width: 180px;">Try Playground</a>
       </div>
     </div>
   </section>
@@ -275,12 +319,14 @@
   </footer>
 
   <!-- Dark-mode toggle -->
-  <button class="au-btn au-btn-glass au-btn-icon"
-    style="position: fixed; bottom: var(--au-space-6); right: var(--au-space-6); z-index: 999;"
-    onclick="document.body.classList.toggle('au-dark')"
-    aria-label="Toggle dark mode"
-    title="Toggle dark mode">
-    🌗
+  <button class="au-btn-glass"
+    style="position: fixed; bottom: var(--au-space-6); right: var(--au-space-6); z-index: 999; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.2);"
+    onclick="document.body.classList.toggle('au-light'); this.textContent = document.body.classList.contains('au-light') ? '🌙' : '☀️'"
+    onmouseover="this.style.transform='scale(1.1) rotate(15deg)'"
+    onmouseout="this.style.transform='scale(1) rotate(0deg)'"
+    aria-label="Toggle theme"
+    title="Toggle light/dark theme">
+    ☀️
   </button>
 
 </body>
