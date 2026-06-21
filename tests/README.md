@@ -73,8 +73,8 @@ npm run test:visual:update
 ## CI/CD Integration
 
 The `.github/workflows/css-testing.yml` workflow runs automatically on:
-- Every push to `master` or `develop`
-- Every pull request to `master` or `develop`
+- Every push
+- Every pull request
 
 ### CI Pipeline Stages:
 1. **Lint CSS** - Validates CSS syntax
