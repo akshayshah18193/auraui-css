@@ -8,86 +8,110 @@
   <link rel="stylesheet" href="glass.css">
   <style>
     .demo-page {
-      --demo-glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
-      --demo-glass-fill: rgba(255, 255, 255, 0.08);
-      --demo-glass-fill-strong: rgba(255, 255, 255, 0.12);
-      --demo-shadow: 0 24px 64px rgba(0, 0, 0, 0.32);
-      --demo-shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.2);
-      --demo-backdrop: blur(24px);
-      --demo-button-highlight: rgba(255, 255, 255, 0.08);
-      --demo-row-highlight: rgba(255, 255, 255, 0.04);
-      --au-bg: #090b0f;
-      --au-bg-alt: #13171d;
-      --au-surface: rgba(255, 255, 255, 0.06);
-      --au-border: rgba(255, 255, 255, 0.12);
-      --au-border-glow: rgba(255, 255, 255, 0.18);
+      --demo-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+      --demo-glass-fill: rgba(255, 255, 255, 0.10);
+      --demo-glass-fill-strong: rgba(255, 255, 255, 0.14);
+      --demo-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+      --demo-shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.25);
+      --demo-backdrop: blur(28px) saturate(180%);
+      --demo-button-highlight: rgba(255, 255, 255, 0.12);
+      --demo-row-highlight: rgba(255, 255, 255, 0.06);
+      --au-bg: #080a0f;
+      --au-bg-alt: #12151c;
+      --au-surface: rgba(255, 255, 255, 0.08);
+      --au-border: rgba(255, 255, 255, 0.14);
+      --au-border-glow: rgba(124, 110, 248, 0.4);
       --au-text: #ffffff;
-      --au-text-muted: rgba(255, 255, 255, 0.7);
-      --au-text-inverse: #090b0f;
-      --au-primary: #ffffff;
-      --au-primary-dark: rgba(255, 255, 255, 0.82);
-      --au-primary-rgb: 255, 255, 255;
-      --au-success: #ffffff;
-      --au-danger: #ffffff;
-      --au-warning: #ffffff;
-      --au-info: #ffffff;
+      --au-text-muted: rgba(255, 255, 255, 0.75);
+      --au-text-inverse: #080a0f;
+      --au-primary: #7c6ef8;
+      --au-primary-dark: rgba(124, 110, 248, 0.85);
+      --au-primary-rgb: 124, 110, 248;
+      --au-success: #2dd4a7;
+      --au-danger: #f25c6e;
+      --au-warning: #f5a623;
+      --au-info: #38bdf8;
       --au-glass-bg: var(--demo-glass-bg);
-      --au-glass-border: rgba(255, 255, 255, 0.16);
+      --au-glass-border: rgba(255, 255, 255, 0.18);
       --au-glass-shadow: var(--demo-shadow);
       background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 34%),
-        linear-gradient(180deg, #090b0f 0%, #12161c 52%, #090b0f 100%);
+        radial-gradient(circle at top left, rgba(124, 110, 248, 0.15), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(45, 212, 167, 0.10), transparent 40%),
+        linear-gradient(135deg, #080a0f 0%, #13171e 50%, #080a0f 100%);
       color: var(--au-text);
+      min-height: 100vh;
     }
 
     .demo-page.au-light {
-      --demo-glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.55));
-      --demo-glass-fill: rgba(0, 0, 0, 0.04);
-      --demo-glass-fill-strong: rgba(0, 0, 0, 0.08);
-      --demo-shadow: 0 24px 64px rgba(34, 34, 34, 0.12);
-      --demo-shadow-soft: 0 16px 40px rgba(34, 34, 34, 0.08);
-      --demo-button-highlight: rgba(255, 255, 255, 0.72);
-      --demo-row-highlight: rgba(0, 0, 0, 0.03);
-      --au-bg: #f4f4f1;
-      --au-bg-alt: #ecece8;
-      --au-surface: rgba(255, 255, 255, 0.82);
-      --au-border: rgba(0, 0, 0, 0.12);
-      --au-border-glow: rgba(0, 0, 0, 0.16);
-      --au-text: #101010;
-      --au-text-muted: rgba(16, 16, 16, 0.68);
+      --demo-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.65));
+      --demo-glass-fill: rgba(255, 255, 255, 0.75);
+      --demo-glass-fill-strong: rgba(255, 255, 255, 0.85);
+      --demo-shadow: 0 24px 64px rgba(0, 0, 0, 0.10);
+      --demo-shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.06);
+      --demo-button-highlight: rgba(255, 255, 255, 0.90);
+      --demo-row-highlight: rgba(0, 0, 0, 0.025);
+      --au-bg: #f7f8fa;
+      --au-bg-alt: #eeeff2;
+      --au-surface: rgba(255, 255, 255, 0.90);
+      --au-border: rgba(0, 0, 0, 0.10);
+      --au-border-glow: rgba(124, 110, 248, 0.3);
+      --au-text: #0f1419;
+      --au-text-muted: rgba(15, 20, 25, 0.70);
       --au-text-inverse: #ffffff;
-      --au-primary: #101010;
-      --au-primary-dark: rgba(16, 16, 16, 0.82);
-      --au-primary-rgb: 16, 16, 16;
-      --au-success: #101010;
-      --au-danger: #101010;
-      --au-warning: #101010;
-      --au-info: #101010;
-      --au-glass-border: rgba(255, 255, 255, 0.62);
+      --au-primary: #7c6ef8;
+      --au-primary-dark: rgba(124, 110, 248, 0.85);
+      --au-primary-rgb: 124, 110, 248;
+      --au-success: #22c997;
+      --au-danger: #e74c5e;
+      --au-warning: #f59f0b;
+      --au-info: #0ea5e9;
+      --au-glass-border: rgba(255, 255, 255, 0.70);
       background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 40%),
-        linear-gradient(180deg, #f4f4f1 0%, #ecece8 55%, #f7f7f4 100%);
+        radial-gradient(circle at top left, rgba(124, 110, 248, 0.08), transparent 45%),
+        radial-gradient(circle at bottom right, rgba(45, 212, 167, 0.06), transparent 45%),
+        linear-gradient(135deg, #f7f8fa 0%, #eeeff2 50%, #f9fafb 100%);
     }
 
     .demo-page > header {
       position: sticky;
       top: 0;
       z-index: var(--au-z-overlay);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      background: color-mix(in srgb, var(--au-bg) 72%, transparent);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: linear-gradient(135deg, 
+        rgba(var(--au-bg), 0.85), 
+        rgba(var(--au-bg), 0.75));
       border-bottom: 1px solid var(--au-border);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
     }
 
     .demo-gradient-bg {
-      padding-block: var(--au-space-4) var(--au-space-10);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent);
+      padding-block: var(--au-space-12) var(--au-space-16);
+      background: linear-gradient(135deg, 
+        rgba(124, 110, 248, 0.12) 0%, 
+        rgba(45, 212, 167, 0.08) 100%);
       border-bottom: 1px solid var(--au-border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .demo-gradient-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(124, 110, 248, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+      animation: pulse-demo 8s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-demo {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
     }
 
     .demo-section {
-      padding-block: clamp(2.75rem, 6vw, 4.5rem);
-      border-bottom: 1px solid var(--au-border);
+      padding-block: clamp(3.5rem, 7vw, 5.5rem);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .demo-section:last-child {
@@ -95,16 +119,21 @@
     }
 
     .demo-section-title {
-      font-size: var(--au-text-2xl);
-      font-weight: 700;
-      margin-bottom: var(--au-space-2);
+      font-size: var(--au-text-3xl);
+      font-weight: 800;
+      margin-bottom: var(--au-space-3);
+      background: linear-gradient(135deg, var(--au-text) 0%, var(--au-text-muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .demo-section-desc {
       color: var(--au-text-muted);
-      font-size: var(--au-text-sm);
-      margin-bottom: var(--au-space-6);
-      max-width: 52rem;
+      font-size: var(--au-text-base);
+      margin-bottom: var(--au-space-8);
+      max-width: 56rem;
+      line-height: 1.8;
     }
 
     .demo-chip {
@@ -179,6 +208,20 @@
       bottom: var(--au-space-6);
       right: var(--au-space-6);
       z-index: var(--au-z-toast);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: var(--au-glass-shadow);
+    }
+    
+    .theme-toggle-btn:hover {
+      transform: scale(1.1) rotate(15deg);
     }
 
     .demo-page .au-card,
