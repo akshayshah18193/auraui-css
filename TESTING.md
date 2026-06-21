@@ -89,7 +89,7 @@ npm test
 ## 🔄 CI/CD Integration
 
 The GitHub Actions workflow runs automatically on:
-- Every push to `master` or `develop`
+- Every push
 - Every pull request
 
 ### Pipeline Stages:
