@@ -32,11 +32,19 @@
   --au-warning:      #F5A623;
   --au-info:         #38BDF8;
 
-  /* Glass */
-  --au-glass-bg:     rgba(255 255 255 / 0.06);
-  --au-glass-border: rgba(255 255 255 / 0.12);
-  --au-glass-blur:   16px;
-  --au-glass-shadow: 0 8px 32px rgba(0 0 0 / 0.35);
+  /* Glass Morphism - Enhanced realism */
+  --au-glass-bg:          rgba(255 255 255 / 0.08);
+  --au-glass-bg-gradient: linear-gradient(135deg, 
+                            rgba(255 255 255 / 0.12) 0%, 
+                            rgba(255 255 255 / 0.05) 100%);
+  --au-glass-border:      rgba(255 255 255 / 0.18);
+  --au-glass-border-top:  rgba(255 255 255 / 0.25);
+  --au-glass-border-bottom: rgba(255 255 255 / 0.08);
+  --au-glass-blur:        20px;
+  --au-glass-shadow:      0 8px 32px rgba(0 0 0 / 0.4),
+                          0 2px 8px rgba(0 0 0 / 0.2);
+  --au-glass-highlight:   rgba(255 255 255 / 0.15);
+  --au-glass-lowlight:    rgba(0 0 0 / 0.1);
 
   /* Typography */
   --au-font-sans: "Inter", ui-sans-serif, system-ui, -apple-system,
@@ -100,9 +108,17 @@
   --au-text-muted:   #5A6380;
   --au-text-inverse: #F0F4FF;
 
-  --au-glass-bg:     rgba(255 255 255 / 0.55);
-  --au-glass-border: rgba(255 255 255 / 0.70);
-  --au-glass-shadow: 0 8px 32px rgba(0 0 0 / 0.12);
+  --au-glass-bg:          rgba(255 255 255 / 0.65);
+  --au-glass-bg-gradient: linear-gradient(135deg, 
+                            rgba(255 255 255 / 0.85) 0%, 
+                            rgba(255 255 255 / 0.55) 100%);
+  --au-glass-border:      rgba(255 255 255 / 0.85);
+  --au-glass-border-top:  rgba(255 255 255 / 0.95);
+  --au-glass-border-bottom: rgba(255 255 255 / 0.45);
+  --au-glass-shadow:      0 8px 32px rgba(0 0 0 / 0.08),
+                          0 2px 8px rgba(0 0 0 / 0.04);
+  --au-glass-highlight:   rgba(255 255 255 / 1);
+  --au-glass-lowlight:    rgba(0 0 0 / 0.03);
 }
 
 
@@ -235,34 +251,134 @@ button, input, select, textarea { font: inherit; }
    4. GLASS MORPHISM
    ───────────────────────────────────────────────────────────── */
 .au-glass {
-  background: var(--au-glass-bg);
-  backdrop-filter: blur(var(--au-glass-blur));
-  -webkit-backdrop-filter: blur(var(--au-glass-blur));
-  border: 1px solid var(--au-glass-border);
+  position: relative;
+  background: var(--au-glass-bg-gradient);
+  backdrop-filter: blur(var(--au-glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--au-glass-blur)) saturate(180%);
+  border: 1px solid transparent;
+  border-top-color: var(--au-glass-border-top);
+  border-bottom-color: var(--au-glass-border-bottom);
+  border-left-color: var(--au-glass-border);
+  border-right-color: var(--au-glass-border);
   box-shadow: var(--au-glass-shadow);
   border-radius: var(--au-radius-lg);
 }
 
+.au-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    var(--au-glass-highlight) 0%, 
+    transparent 50%, 
+    var(--au-glass-lowlight) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.au-glass::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, 
+    var(--au-glass-highlight) 0%, 
+    transparent 100%);
+  border-radius: var(--au-radius-lg) var(--au-radius-lg) 0 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .au-glass-sm {
-  --au-glass-blur: 8px;
-  --au-glass-bg: rgba(255 255 255 / 0.04);
-  background: var(--au-glass-bg);
-  backdrop-filter: blur(var(--au-glass-blur));
-  -webkit-backdrop-filter: blur(var(--au-glass-blur));
-  border: 1px solid var(--au-glass-border);
+  --au-glass-blur: 12px;
+  --au-glass-bg-local: rgba(255 255 255 / 0.06);
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(255 255 255 / 0.08) 0%, 
+    rgba(255 255 255 / 0.04) 100%);
+  backdrop-filter: blur(var(--au-glass-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--au-glass-blur)) saturate(150%);
+  border: 1px solid transparent;
+  border-top-color: rgba(255 255 255 / 0.2);
+  border-bottom-color: rgba(255 255 255 / 0.06);
+  border-left-color: rgba(255 255 255 / 0.12);
+  border-right-color: rgba(255 255 255 / 0.12);
   box-shadow: var(--au-glass-shadow);
   border-radius: var(--au-radius);
 }
 
+.au-glass-sm::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(255 255 255 / 0.12) 0%, 
+    transparent 50%, 
+    rgba(0 0 0 / 0.08) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
 .au-glass-lg {
-  --au-glass-blur: 28px;
-  --au-glass-bg: rgba(255 255 255 / 0.08);
-  background: var(--au-glass-bg);
-  backdrop-filter: blur(var(--au-glass-blur));
-  -webkit-backdrop-filter: blur(var(--au-glass-blur));
-  border: 1px solid var(--au-glass-border);
-  box-shadow: var(--au-glass-shadow);
+  --au-glass-blur: 32px;
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(255 255 255 / 0.15) 0%, 
+    rgba(255 255 255 / 0.08) 100%);
+  backdrop-filter: blur(var(--au-glass-blur)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--au-glass-blur)) saturate(200%);
+  border: 1px solid transparent;
+  border-top-color: rgba(255 255 255 / 0.3);
+  border-bottom-color: rgba(255 255 255 / 0.1);
+  border-left-color: rgba(255 255 255 / 0.2);
+  border-right-color: rgba(255 255 255 / 0.2);
+  box-shadow: var(--au-glass-shadow),
+              inset 0 1px 0 rgba(255 255 255 / 0.2);
   border-radius: var(--au-radius-xl);
+}
+
+.au-glass-lg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    rgba(255 255 255 / 0.2) 0%, 
+    transparent 50%, 
+    rgba(0 0 0 / 0.12) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.au-glass-lg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: linear-gradient(180deg, 
+    rgba(255 255 255 / 0.18) 0%, 
+    transparent 100%);
+  border-radius: var(--au-radius-xl) var(--au-radius-xl) 0 0;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 /* Shimmer border variant */
@@ -382,7 +498,7 @@ button, input, select, textarea { font: inherit; }
 .au-input:hover,
 .au-select:hover,
 .au-textarea:hover {
-  border-color: rgba(255 255 255 / 0.2);
+  border-color: var(--au-border-glow);
 }
 
 .au-input:focus,
@@ -464,7 +580,7 @@ button, input, select, textarea { font: inherit; }
   display: flex;
   align-items: center;
   padding: var(--au-space-3) var(--au-space-4);
-  background: rgba(255 255 255 / 0.04);
+  background: var(--au-glass-bg);
   color: var(--au-text-muted);
   font-size: var(--au-text-sm);
   white-space: nowrap;
@@ -695,7 +811,7 @@ button, input, select, textarea { font: inherit; }
 /* Primary */
 .au-btn-primary {
   background: var(--au-primary);
-  color: #fff;
+  color: var(--au-text-inverse);
 }
 .au-btn-primary:hover {
   background: var(--au-primary-dark);
@@ -709,8 +825,8 @@ button, input, select, textarea { font: inherit; }
   color: var(--au-text);
 }
 .au-btn-secondary:hover {
-  background: rgba(255 255 255 / 0.10);
-  border-color: rgba(255 255 255 / 0.2);
+  background: var(--au-glass-bg);
+  border-color: var(--au-border-glow);
 }
 
 /* Outline */
@@ -735,7 +851,7 @@ button, input, select, textarea { font: inherit; }
 /* Danger */
 .au-btn-danger {
   background: var(--au-danger);
-  color: #fff;
+  color: var(--au-text-inverse);
 }
 .au-btn-danger:hover { filter: brightness(1.1); }
 
@@ -748,15 +864,42 @@ button, input, select, textarea { font: inherit; }
 
 /* Glass button */
 .au-btn-glass {
-  background: var(--au-glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-color: var(--au-glass-border);
+  position: relative;
+  background: var(--au-glass-bg-gradient);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid transparent;
+  border-top-color: rgba(255 255 255 / 0.2);
+  border-bottom-color: rgba(255 255 255 / 0.05);
+  border-left-color: rgba(255 255 255 / 0.1);
+  border-right-color: rgba(255 255 255 / 0.1);
   color: var(--au-text);
+  box-shadow: 0 4px 16px rgba(0 0 0 / 0.25);
 }
+
+.au-btn-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, 
+    rgba(255 255 255 / 0.15) 0%, 
+    transparent 100%);
+  border-radius: inherit;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  pointer-events: none;
+}
+
 .au-btn-glass:hover {
-  background: rgba(255 255 255 / 0.10);
-  box-shadow: var(--au-glass-shadow);
+  background: linear-gradient(135deg, 
+    rgba(255 255 255 / 0.15) 0%, 
+    rgba(255 255 255 / 0.08) 100%);
+  box-shadow: var(--au-glass-shadow),
+              inset 0 1px 0 rgba(255 255 255 / 0.2);
+  border-top-color: rgba(255 255 255 / 0.25);
 }
 
 /* Sizes */
@@ -818,14 +961,51 @@ button, input, select, textarea { font: inherit; }
   font-weight: 500;
   line-height: 1.4;
   white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid transparent;
 }
 
-.au-badge-primary { background: rgba(var(--au-primary-rgb), 0.18); color: var(--au-primary); }
-.au-badge-success { background: rgba(45 212 167 / 0.15); color: var(--au-success); }
-.au-badge-danger  { background: rgba(242 92 110 / 0.15); color: var(--au-danger); }
-.au-badge-warning { background: rgba(245 166 35 / 0.15); color: var(--au-warning); }
-.au-badge-info    { background: rgba(56 189 248 / 0.15); color: var(--au-info); }
-.au-badge-neutral { background: rgba(255 255 255 / 0.08); color: var(--au-text-muted); }
+.au-badge-primary { 
+  background: linear-gradient(135deg, 
+    rgba(var(--au-primary-rgb), 0.25) 0%, 
+    rgba(var(--au-primary-rgb), 0.15) 100%);
+  border-color: rgba(var(--au-primary-rgb), 0.3);
+  color: var(--au-primary); 
+}
+.au-badge-success { 
+  background: linear-gradient(135deg, 
+    rgba(45 212 167 / 0.25) 0%, 
+    rgba(45 212 167 / 0.15) 100%);
+  border-color: rgba(45 212 167 / 0.3);
+  color: var(--au-success); 
+}
+.au-badge-danger  { 
+  background: linear-gradient(135deg, 
+    rgba(242 92 110 / 0.25) 0%, 
+    rgba(242 92 110 / 0.15) 100%);
+  border-color: rgba(242 92 110 / 0.3);
+  color: var(--au-danger); 
+}
+.au-badge-warning { 
+  background: linear-gradient(135deg, 
+    rgba(245 166 35 / 0.25) 0%, 
+    rgba(245 166 35 / 0.15) 100%);
+  border-color: rgba(245 166 35 / 0.3);
+  color: var(--au-warning); 
+}
+.au-badge-info    { 
+  background: linear-gradient(135deg, 
+    rgba(56 189 248 / 0.25) 0%, 
+    rgba(56 189 248 / 0.15) 100%);
+  border-color: rgba(56 189 248 / 0.3);
+  color: var(--au-info); 
+}
+.au-badge-neutral { 
+  background: var(--au-glass-bg);
+  border-color: var(--au-border);
+  color: var(--au-text-muted); 
+}
 
 /* Dot indicator */
 .au-badge-dot::before {
@@ -1009,7 +1189,7 @@ button, input, select, textarea { font: inherit; }
 }
 .au-tabs-pill .au-tab.active {
   background: var(--au-primary);
-  color: white;
+  color: var(--au-text-inverse);
 }
 
 
