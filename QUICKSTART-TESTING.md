@@ -72,7 +72,7 @@ git commit -m "Update visual baselines for [feature]"
 ## CI/CD
 
 Tests run automatically on:
-- Pushes to `master` or `develop`
+- Pushes
 - Pull requests
 
 View results: GitHub → Actions tab
